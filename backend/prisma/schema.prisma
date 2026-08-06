@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  COORDENADOR
+  DIRETOR
+  ESTAGIARIO
+}
+
+enum TipoEquipamento {
+  TABLET
+  NOTEBOOK
+  CHROMEBOOK
+}
+
+enum StatusEquipamento {
+  DISPONIVEL
+  EMPRESTADO
+  MANUTENCAO
+  INATIVO
+}
+
+enum StatusEmprestimo {
+  ATIVO
+  FINALIZADO
+}
+
+enum StatusConferencia {
+  OK
+  COM_PROBLEMA
+}
+
+enum PrioridadeManutencao {
+  BAIXA
+  MEDIA
+  ALTA
+}
+
+enum StatusManutencao {
+  ABERTA
+  EM_ANDAMENTO
+  CONCLUIDA
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senhaHash String   @map("senha_hash")
+  role      Role     @default(ESTAGIARIO)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  emprestimosRegistrados Emprestimo[] @relation("EmprestimoRegistradoPor")
+  devolucoesConferidas   Devolucao[]  @relation("DevolucaoConferidaPor")
+  manutencoesRegistradas Manutencao[] @relation("ManutencaoRegistradaPor")
+
+  @@map("usuarios")
+}
+
+model Professor {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  disciplina  String
+  contato     String?
+  periodo     String?
+  observacoes String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  emprestimos Emprestimo[]
+
+  @@map("professores")
+}
+
+model Equipamento {
+  id               Int               @id @default(autoincrement())
+  numeroPatrimonio String            @unique @map("numero_patrimonio")
+  numeroSerie      String            @unique @map("numero_serie")
+  marca            String
+  modelo           String
+  tipo             TipoEquipamento
+  fotoUrl          String?           @map("foto_url")
+  qrCode           String?           @unique @map("qr_code")
+  status           StatusEquipamento @default(DISPONIVEL)
+  localizacao      String?
+  observacoes      String?           @db.Text
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  emprestimoItens EmprestimoItem[]
+  manutencoes     Manutencao[]
+
+  @@index([status])
+  @@map("equipamentos")
+}
+
+model Emprestimo {
+  id                Int              @id @default(autoincrement())
+  professorId       Int              @map("professor_id")
+  usuarioId         Int              @map("usuario_id")
+  data              DateTime
+  hora              String
+  sala              String?
+  turma             String?
+  alunoResponsavel  String?          @map("aluno_responsavel")
+  previsaoDevolucao DateTime?        @map("previsao_devolucao")
+  observacoes       String?          @db.Text
+  status            StatusEmprestimo @default(ATIVO)
+  createdAt         DateTime         @default(now()) @map("created_at")
+  updatedAt         DateTime         @updatedAt @map("updated_at")
+
+  professor Professor        @relation(fields: [professorId], references: [id])
+  usuario   Usuario          @relation("EmprestimoRegistradoPor", fields: [usuarioId], references: [id])
+  itens     EmprestimoItem[]
+
+  @@index([professorId])
+  @@index([status])
+  @@map("emprestimos")
+}
+
+model EmprestimoItem {
+  id            Int      @id @default(autoincrement())
+  emprestimoId  Int      @map("emprestimo_id")
+  equipamentoId Int      @map("equipamento_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  emprestimo  Emprestimo  @relation(fields: [emprestimoId], references: [id])
+  equipamento Equipamento @relation(fields: [equipamentoId], references: [id])
+  devolucao   Devolucao?
+
+  @@index([emprestimoId])
+  @@index([equipamentoId])
+  @@map("emprestimo_itens")
+}
+
+model Devolucao {
+  id               Int               @id @default(autoincrement())
+  emprestimoItemId Int               @unique @map("emprestimo_item_id")
+  usuarioId        Int               @map("usuario_id")
+  data             DateTime
+  hora             String
+  conferencia      StatusConferencia
+  danos            String?           @db.Text
+  fotos            Json?
+  observacoes      String?           @db.Text
+  createdAt        DateTime          @default(now()) @map("created_at")
+
+  emprestimoItem EmprestimoItem @relation(fields: [emprestimoItemId], references: [id])
+  usuario        Usuario        @relation("DevolucaoConferidaPor", fields: [usuarioId], references: [id])
+
+  @@map("devolucoes")
+}
+
+model Manutencao {
+  id            Int                  @id @default(autoincrement())
+  equipamentoId Int                  @map("equipamento_id")
+  problema      String
+  descricao     String?              @db.Text
+  prioridade    PrioridadeManutencao @default(MEDIA)
+  status        StatusManutencao     @default(ABERTA)
+  fotos         Json?
+  registradoPor Int                  @map("registrado_por")
+  dataRegistro  DateTime             @default(now()) @map("data_registro")
+  dataSolucao   DateTime?            @map("data_solucao")
+  createdAt     DateTime             @default(now()) @map("created_at")
+  updatedAt     DateTime             @updatedAt @map("updated_at")
+
+  equipamento Equipamento @relation(fields: [equipamentoId], references: [id])
+  usuario     Usuario     @relation("ManutencaoRegistradaPor", fields: [registradoPor], references: [id])
+
+  @@index([equipamentoId])
+  @@index([status])
+  @@map("manutencoes")
+}
