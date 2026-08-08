@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authRoutes = require('./auth.routes');
 const equipamentoRoutes = require('./equipamento.routes');
+const professorRoutes = require('./professor.routes');
 
 router.get('/health', (req, res) => {
     res.json({ success: true, data: { status: 'ok', timestamp: new Date().toISOString() } });
@@ -9,5 +10,6 @@ router.get('/health', (req, res) => {
 
 router.use('/auth', authRoutes);
 router.use('/equipamentos', equipamentoRoutes);
+router.use('/professores', professorRoutes);
 
 module.exports = router;

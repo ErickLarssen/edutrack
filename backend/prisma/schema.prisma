@@ -72,6 +72,7 @@ model Professor {
   contato     String?
   periodo     String?
   observacoes String?  @db.Text
+  ativo       Boolean  @default(true)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
