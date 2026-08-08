@@ -1,11 +1,17 @@
 const validate = (schema) => (req, res, next) => {
     try {
-        schema.parse({
+        const resultado = schema.parse({
             body: req.body,
             params: req.params,
             query: req.query,
         });
+
+        if (resultado.body) req.body = resultado.body;
+        if (resultado.params) req.params = resultado.params;
+        if (resultado.query) req.query = resultado.query;
+
         next();
+        
     } catch (error) {
         if (error.name === 'ZodError') {
             const detalhes = error.errors.map((e) => ({
