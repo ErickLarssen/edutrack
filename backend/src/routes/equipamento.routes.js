@@ -19,5 +19,6 @@ router.get('/:id', validate(idParamSchema), equipamentoController.buscarPorId);
 router.post('/', authorize('ADMIN', 'ESTAGIARIO'), validate(criarEquipamentoSchema), equipamentoController.criar);
 router.put('/:id', authorize('ADMIN', 'ESTAGIARIO'), validate(atualizarEquipamentoSchema), equipamentoController.atualizar);
 router.delete('/:id', authorize('ADMIN'), validate(idParamSchema), equipamentoController.deletar);
+router.patch('/:id/reativar', authorize('ADMIN'), validate(idParamSchema), equipamentoController.reativar);
 
 module.exports = router;

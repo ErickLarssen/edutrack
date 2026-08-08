@@ -55,4 +55,8 @@ const atualizar = (id, dados) => prisma.equipamento.update({ where: { id }, data
 
 const inativar = (id) => prisma.equipamento.update({ where: { id }, data: { status: 'INATIVO' } });
 
-module.exports = { buscarPorPatrimonio, buscarPorSerie, buscarPorId, listar, criar, atualizar, inativar };
+const reativar = (id) => prisma.equipamento.update({ where: { id }, data: { status: 'DISPONIVEL' } });
+
+const buscarPorIds = (ids) => prisma.equipamento.findMany({ where: { id: { in: ids } } });
+
+module.exports = { buscarPorPatrimonio, buscarPorSerie, buscarPorId, buscarPorIds, listar, criar, atualizar, inativar, reativar };
