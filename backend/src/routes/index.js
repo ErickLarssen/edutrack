@@ -5,6 +5,7 @@ const equipamentoRoutes = require('./equipamento.routes');
 const professorRoutes = require('./professor.routes');
 const emprestimoRoutes = require('./emprestimo.routes');
 const devolucaoRoutes = require('./devolucao.routes');
+const manutencaoRoutes = require('./manutencao.routes');
 
 router.get('/health', (req, res) => {
     res.json({ success: true, data: { status: 'ok', timestamp: new Date().toISOString() } });
@@ -15,5 +16,6 @@ router.use('/equipamentos', equipamentoRoutes);
 router.use('/professores', professorRoutes);
 router.use('/emprestimos', emprestimoRoutes);
 router.use('/devolucoes', devolucaoRoutes);
+router.use('/manutencoes', manutencaoRoutes);
 
 module.exports = router;
