@@ -65,4 +65,11 @@ const listar = async ({ status, professorId, pagina = 1, limite = 20 }) => {
 
 const atualizar = (id, dados) => prisma.emprestimo.update({ where: { id }, data: dados });
 
-module.exports = { criarComItens, buscarPorId, listar, atualizar };
+const buscarItemPorId = (itemId) => {
+    return prisma.emprestimoItem.findUnique({
+        where: { id: itemId },
+        include: { equipamento: true, devolucao: true },
+    });
+};
+
+module.exports = { criarComItens, buscarPorId, listar, atualizar, buscarItemPorId };

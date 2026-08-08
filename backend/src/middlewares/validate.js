@@ -11,10 +11,12 @@ const validate = (schema) => (req, res, next) => {
         if (resultado.query) req.query = resultado.query;
 
         next();
-        
+
     } catch (error) {
         if (error.name === 'ZodError') {
-            const detalhes = error.errors.map((e) => ({
+            const problemas = error.issues || error.errors || [];
+            const detalhes = problemas.map((e) => ({
+
                 campo: e.path.join('.'),
                 mensagem: e.message,
             }));
