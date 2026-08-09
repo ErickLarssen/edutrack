@@ -6,7 +6,7 @@ const usuarioRepository = require('../repositories/usuario.repository');
 const login = async (email, senha) => {
     const usuario = await usuarioRepository.buscarPorEmail(email);
 
-    if (!usuario) {
+    if (!usuario || !usuario.ativo) {
         throw new AppError('Credenciais inválidas', 401);
     }
 
