@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { LoginPage } from './pages/LoginPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { EquipamentosPage } from './pages/EquipamentosPage'
 import { PlaceholderPage } from './pages/PlaceholderPage'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import { AppLayout } from './layouts/AppLayout'
@@ -13,7 +14,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />
-          <Route path="/equipamentos" element={<PlaceholderPage title="Equipamentos" />} />
+          <Route path="/equipamentos" element={<EquipamentosPage />} />
           <Route path="/professores" element={<PlaceholderPage title="Professores" />} />
           <Route path="/emprestimos" element={<PlaceholderPage title="Empréstimos" />} />
           <Route path="/devolucoes" element={<PlaceholderPage title="Devoluções" />} />
