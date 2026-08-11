@@ -19,5 +19,6 @@ router.get('/:id', validate(idParamSchema), professorController.buscarPorId);
 router.post('/', authorize('ADMIN', 'ESTAGIARIO'), validate(criarProfessorSchema), professorController.criar);
 router.put('/:id', authorize('ADMIN', 'ESTAGIARIO'), validate(atualizarProfessorSchema), professorController.atualizar);
 router.delete('/:id', authorize('ADMIN'), validate(idParamSchema), professorController.deletar);
+router.patch('/:id/reativar', authorize('ADMIN'), validate(idParamSchema), professorController.reativar);
 
 module.exports = router;

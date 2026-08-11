@@ -34,4 +34,6 @@ const atualizar = (id, dados) => prisma.professor.update({ where: { id }, data: 
 
 const inativar = (id) => prisma.professor.update({ where: { id }, data: { ativo: false } });
 
-module.exports = { buscarPorId, listar, criar, atualizar, inativar };
+const reativar = (id) => prisma.professor.update({ where: { id }, data: { ativo: true } });
+
+module.exports = { buscarPorId, listar, criar, atualizar, inativar, reativar };

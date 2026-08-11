@@ -12,14 +12,14 @@ export function EquipamentoForm({ equipamento, onSubmit, enviando }) {
         formState: { errors },
     } = useForm({
         resolver: zodResolver(equipamentoSchema),
-        defaultValues: equipamento ?? {
-            numeroPatrimonio: '',
-            numeroSerie: '',
-            marca: '',
-            modelo: '',
-            tipo: 'TABLET',
-            localizacao: '',
-            observacoes: '',
+        defaultValues: {
+            numeroPatrimonio: equipamento?.numeroPatrimonio ?? '',
+            numeroSerie: equipamento?.numeroSerie ?? '',
+            marca: equipamento?.marca ?? '',
+            modelo: equipamento?.modelo ?? '',
+            tipo: equipamento?.tipo ?? 'TABLET',
+            localizacao: equipamento?.localizacao ?? '',
+            observacoes: equipamento?.observacoes ?? '',
         },
     })
 

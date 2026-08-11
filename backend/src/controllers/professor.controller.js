@@ -45,4 +45,13 @@ const deletar = async (req, res, next) => {
     }
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar, deletar };
+const reativar = async (req, res, next) => {
+    try {
+        const professor = await professorService.reativar(req.params.id);
+        res.json({ success: true, data: professor });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, deletar, reativar };

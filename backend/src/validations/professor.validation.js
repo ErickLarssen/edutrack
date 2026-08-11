@@ -1,4 +1,5 @@
 const { z } = require('zod');
+const { booleanoDeQuery } = require('./shared');
 
 const dadosBase = {
     nome: z.string().min(1, 'Nome é obrigatório'),
@@ -28,7 +29,7 @@ const idParamSchema = z.object({
 const listarProfessoresSchema = z.object({
     query: z.object({
         busca: z.string().optional(),
-        incluirInativos: z.coerce.boolean().optional(),
+        incluirInativos: booleanoDeQuery.optional(),
         pagina: z.coerce.number().int().positive().optional(),
         limite: z.coerce.number().int().positive().max(100).optional(),
     }),

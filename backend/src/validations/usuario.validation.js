@@ -1,4 +1,5 @@
 const { z } = require('zod');
+const { booleanoDeQuery } = require('./shared');
 
 const ROLES = ['ADMIN', 'COORDENADOR', 'DIRETOR', 'ESTAGIARIO'];
 
@@ -29,7 +30,7 @@ const listarUsuariosSchema = z.object({
     query: z.object({
         role: z.enum(ROLES).optional(),
         busca: z.string().optional(),
-        incluirInativos: z.coerce.boolean().optional(),
+        incluirInativos: booleanoDeQuery.optional(),
         pagina: z.coerce.number().int().positive().optional(),
         limite: z.coerce.number().int().positive().max(100).optional(),
     }),

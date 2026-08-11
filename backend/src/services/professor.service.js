@@ -23,4 +23,12 @@ const inativar = async (id) => {
     return professorRepository.inativar(id);
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar, inativar };
+const reativar = async (id) => {
+    const professor = await buscarPorId(id);
+    if (professor.ativo) {
+        throw new AppError('Professor já está ativo', 409);
+    }
+    return professorRepository.reativar(id);
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, inativar, reativar };

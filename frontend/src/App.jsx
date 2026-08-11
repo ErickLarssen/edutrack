@@ -5,6 +5,7 @@ import { EquipamentosPage } from './pages/EquipamentosPage'
 import { PlaceholderPage } from './pages/PlaceholderPage'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import { AppLayout } from './layouts/AppLayout'
+import { ProfessoresPage } from './pages/ProfessoresPage'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/equipamentos" element={<EquipamentosPage />} />
-          <Route path="/professores" element={<PlaceholderPage title="Professores" />} />
+          <Route path="/professores" element={<ProfessoresPage />} />
           <Route path="/emprestimos" element={<PlaceholderPage title="Empréstimos" />} />
           <Route path="/devolucoes" element={<PlaceholderPage title="Devoluções" />} />
           <Route path="/manutencoes" element={<PlaceholderPage title="Manutenção" />} />

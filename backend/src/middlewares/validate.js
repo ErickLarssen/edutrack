@@ -8,7 +8,14 @@ const validate = (schema) => (req, res, next) => {
 
         if (resultado.body) req.body = resultado.body;
         if (resultado.params) req.params = resultado.params;
-        if (resultado.query) req.query = resultado.query;
+        if (resultado.query) {
+            Object.defineProperty(req, 'query', {
+                value: resultado.query,
+                writable: true,
+                enumerable: true,
+                configurable: true,
+            });
+        }
 
         next();
 
