@@ -45,6 +45,8 @@ const atualizar = (id, dados) => prisma.usuario.update({ where: { id }, data: da
 
 const inativar = (id) => prisma.usuario.update({ where: { id }, data: { ativo: false }, select: SELECAO_PUBLICA });
 
+const reativar = (id) => prisma.usuario.update({ where: { id }, data: { ativo: true }, select: SELECAO_PUBLICA });
+
 const contarAdminsAtivos = () => prisma.usuario.count({ where: { role: 'ADMIN', ativo: true } });
 
 module.exports = {
@@ -55,5 +57,6 @@ module.exports = {
     criar,
     atualizar,
     inativar,
+    reativar,
     contarAdminsAtivos,
 };

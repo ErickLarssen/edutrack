@@ -10,6 +10,7 @@ import { EmprestimosPage } from './pages/EmprestimosPage'
 import { DevolucoesPage } from './pages/DevolucoesPage'
 import { ManutencoesPage } from './pages/ManutencoesPage'
 import { RelatoriosPage } from './pages/RelatoriosPage'
+import { UsuariosPage } from './pages/UsuariosPage'
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/devolucoes" element={<DevolucoesPage />} />
           <Route path="/manutencoes" element={<ManutencoesPage />} />
           <Route path="/relatorios" element={<RelatoriosPage />} />
-          <Route path="/usuarios" element={<PlaceholderPage title="Usuários" />} />
+          <Route path="/usuarios" element={<UsuariosPage />} />
         </Route>
       </Route>
     </Routes>

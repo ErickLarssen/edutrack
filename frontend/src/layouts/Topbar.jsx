@@ -1,12 +1,6 @@
 import { Menu, LogOut } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
-
-const ROLE_LABELS = {
-    ADMIN: 'Administrador',
-    COORDENADOR: 'Coordenador',
-    DIRETOR: 'Diretor',
-    ESTAGIARIO: 'Estagiário',
-}
+import { ROLE_LABELS } from '../utils/role'
 
 export function Topbar({ onAbrirMenu }) {
     const { usuario, logout } = useAuth()

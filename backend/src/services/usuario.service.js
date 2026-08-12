@@ -71,4 +71,15 @@ const inativar = async (id, usuarioAutenticado) => {
     return usuarioRepository.inativar(id);
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar, inativar };
+const reativar = async (id) => {
+    const usuario = await usuarioRepository.buscarPorId(id);
+    if (!usuario) {
+        throw new AppError('Usuário não encontrado', 404);
+    }
+    if (usuario.ativo) {
+        throw new AppError('Usuário já está ativo', 409);
+    }
+    return usuarioRepository.reativar(id);
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, inativar, reativar };

@@ -20,5 +20,6 @@ router.get('/:id', validate(idParamSchema), usuarioController.buscarPorId);
 router.post('/', validate(criarUsuarioSchema), usuarioController.criar);
 router.put('/:id', validate(atualizarUsuarioSchema), usuarioController.atualizar);
 router.delete('/:id', validate(idParamSchema), usuarioController.deletar);
+router.patch('/:id/reativar', validate(idParamSchema), usuarioController.reativar);
 
 module.exports = router;
