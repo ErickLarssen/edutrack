@@ -7,6 +7,9 @@ import { ProtectedRoute } from './routes/ProtectedRoute'
 import { AppLayout } from './layouts/AppLayout'
 import { ProfessoresPage } from './pages/ProfessoresPage'
 import { EmprestimosPage } from './pages/EmprestimosPage'
+import { DevolucoesPage } from './pages/DevolucoesPage'
+import { ManutencoesPage } from './pages/ManutencoesPage'
+import { RelatoriosPage } from './pages/RelatoriosPage'
 
 function App() {
   return (
@@ -19,9 +22,9 @@ function App() {
           <Route path="/equipamentos" element={<EquipamentosPage />} />
           <Route path="/professores" element={<ProfessoresPage />} />
           <Route path="/emprestimos" element={<EmprestimosPage />} />
-          <Route path="/devolucoes" element={<PlaceholderPage title="Devoluções" />} />
-          <Route path="/manutencoes" element={<PlaceholderPage title="Manutenção" />} />
-          <Route path="/relatorios" element={<PlaceholderPage title="Relatórios" />} />
+          <Route path="/devolucoes" element={<DevolucoesPage />} />
+          <Route path="/manutencoes" element={<ManutencoesPage />} />
+          <Route path="/relatorios" element={<RelatoriosPage />} />
           <Route path="/usuarios" element={<PlaceholderPage title="Usuários" />} />
         </Route>
       </Route>
