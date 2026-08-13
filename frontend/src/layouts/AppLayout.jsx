@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
+import { PageTransition } from '../components/PageTransition'
 
 export function AppLayout() {
     const [sidebarAberta, setSidebarAberta] = useState(false)
@@ -13,7 +14,7 @@ export function AppLayout() {
             <div className="md:pl-64">
                 <Topbar onAbrirMenu={() => setSidebarAberta(true)} />
                 <main className="p-6">
-                    <Outlet />
+                    <PageTransition />
                 </main>
             </div>
         </div>

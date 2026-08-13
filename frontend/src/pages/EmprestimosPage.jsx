@@ -11,6 +11,7 @@ import { EmprestimoDetalhes } from '../components/emprestimos/EmprestimoDetalhes
 import { STATUS_EMPRESTIMO } from '../utils/statusEmprestimo'
 import { formatarData } from '../utils/formatDate'
 import { limparPayload } from '../utils/limparPayload'
+import { Spinner } from '../components/ui/Spinner'
 
 export function EmprestimosPage() {
     const [modalAberto, setModalAberto] = useState(false)
@@ -59,7 +60,7 @@ export function EmprestimosPage() {
             </div>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
-            {isLoading && <p className="text-sm text-slate-500">Carregando...</p>}
+            {isLoading && <Spinner />}
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os empréstimos.</p>}
 
             {data && (

@@ -2,6 +2,7 @@ import { Clock } from 'lucide-react'
 import { useEquipamentosMaisUtilizados, useEquipamentosMaisDanificados, useTempoMedioEmprestimo } from '../hooks/useRelatorios'
 import { RankingList } from '../components/relatorios/RankingList'
 import { StatCard } from '../components/ui/StatCard'
+import { Spinner } from '../components/ui/Spinner'
 
 export function RelatoriosPage() {
     const { data: maisUtilizados, isLoading: carregandoUtilizados } = useEquipamentosMaisUtilizados()
@@ -28,7 +29,7 @@ export function RelatoriosPage() {
 
             <div className="grid gap-6 lg:grid-cols-2">
                 {carregandoUtilizados ? (
-                    <p className="text-sm text-slate-500">Carregando...</p>
+                    <Spinner />
                 ) : (
                     <RankingList
                         title="Equipamentos mais utilizados"
@@ -39,7 +40,7 @@ export function RelatoriosPage() {
                 )}
 
                 {carregandoDanificados ? (
-                    <p className="text-sm text-slate-500">Carregando...</p>
+                    <Spinner />
                 ) : (
                     <RankingList
                         title="Equipamentos mais danificados"

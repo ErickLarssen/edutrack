@@ -4,12 +4,15 @@ import { StatCard } from '../components/ui/StatCard'
 import { Card, CardHeader, CardContent } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
 import { formatarData } from '../utils/formatDate'
+import { useRevealOnData } from '../hooks/useRevealOnData'
+import { Spinner } from '../components/ui/Spinner'
 
 export function DashboardPage() {
     const { data, isLoading, isError } = useDashboard()
+    const statsRef = useRevealOnData(data)
 
     if (isLoading) {
-        return <p className="text-sm text-slate-500">Carregando dashboard...</p>
+        return <Spinner />
     }
 
     if (isError) {
@@ -25,7 +28,7 @@ export function DashboardPage() {
                 <p className="text-sm text-slate-500">Visão geral do sistema</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <div ref={statsRef} className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                 <StatCard label="Disponíveis" value={equipamentos.DISPONIVEL} icon={CheckCircle2} tone="success" />
                 <StatCard label="Emprestados" value={equipamentos.EMPRESTADO} icon={Laptop} tone="brand" />
                 <StatCard label="Em manutenção" value={equipamentos.MANUTENCAO} icon={Wrench} tone="warning" />

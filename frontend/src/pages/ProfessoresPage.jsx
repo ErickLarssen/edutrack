@@ -8,6 +8,7 @@ import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { ConfirmDialog } from '../components/ui/ConfirmDialog'
 import { ProfessorForm } from '../components/professores/ProfessorForm'
+import { Spinner } from '../components/ui/Spinner'
 
 export function ProfessoresPage() {
     const [incluirInativos, setIncluirInativos] = useState(false)
@@ -84,7 +85,7 @@ export function ProfessoresPage() {
             </label>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
-            {isLoading && <p className="text-sm text-slate-500">Carregando...</p>}
+            {isLoading && <Spinner />}
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os professores.</p>}
 
             {data && (

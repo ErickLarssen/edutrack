@@ -2,6 +2,7 @@ import { useDevolucoes } from '../hooks/useDevolucoes'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
 import { Badge } from '../components/ui/Badge'
 import { formatarData } from '../utils/formatDate'
+import { Spinner } from '../components/ui/Spinner'
 
 export function DevolucoesPage() {
     const { data, isLoading, isError } = useDevolucoes()
@@ -13,7 +14,7 @@ export function DevolucoesPage() {
                 <p className="text-sm text-slate-500">Histórico de devoluções registradas</p>
             </div>
 
-            {isLoading && <p className="text-sm text-slate-500">Carregando...</p>}
+            {isLoading && <Spinner />}
             {isError && <p className="text-sm text-red-600">Não foi possível carregar as devoluções.</p>}
 
             {data && (

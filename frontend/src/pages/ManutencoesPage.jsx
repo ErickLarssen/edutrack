@@ -9,6 +9,7 @@ import { Modal } from '../components/ui/Modal'
 import { ManutencaoForm } from '../components/manutencoes/ManutencaoForm'
 import { STATUS_MANUTENCAO, PRIORIDADE_MANUTENCAO, TRANSICOES_VALIDAS } from '../utils/statusManutencao'
 import { formatarData } from '../utils/formatDate'
+import { Spinner } from '../components/ui/Spinner'
 
 export function ManutencoesPage() {
     const [modalAberto, setModalAberto] = useState(false)
@@ -64,7 +65,7 @@ export function ManutencoesPage() {
             </div>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
-            {isLoading && <p className="text-sm text-slate-500">Carregando...</p>}
+            {isLoading && <Spinner />}
             {isError && <p className="text-sm text-red-600">Não foi possível carregar as manutenções.</p>}
 
             {data && (

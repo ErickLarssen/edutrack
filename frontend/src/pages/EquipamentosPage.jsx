@@ -9,6 +9,7 @@ import { Modal } from '../components/ui/Modal'
 import { ConfirmDialog } from '../components/ui/ConfirmDialog'
 import { EquipamentoForm } from '../components/equipamentos/EquipamentoForm'
 import { STATUS_EQUIPAMENTO, TIPO_EQUIPAMENTO } from '../utils/statusEquipamento'
+import { Spinner } from '../components/ui/Spinner'
 
 export function EquipamentosPage() {
     const [modalAberto, setModalAberto] = useState(false)
@@ -74,7 +75,7 @@ export function EquipamentosPage() {
             </div>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
-            {isLoading && <p className="text-sm text-slate-500">Carregando...</p>}
+            {isLoading && <Spinner />}
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os equipamentos.</p>}
 
             {data && (

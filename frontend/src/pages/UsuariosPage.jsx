@@ -11,6 +11,7 @@ import { UsuarioForm } from '../components/usuarios/UsuarioForm'
 import { ROLE_LABELS } from '../utils/role'
 import { limparPayload } from '../utils/limparPayload'
 import { useAuth } from '../contexts/AuthContext'
+import { Spinner } from '../components/ui/Spinner'
 
 export function UsuariosPage() {
     const { usuario: usuarioLogado } = useAuth()
@@ -89,7 +90,7 @@ export function UsuariosPage() {
             </label>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
-            {isLoading && <p className="text-sm text-slate-500">Carregando...</p>}
+            {isLoading && <Spinner />}
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os usuários.</p>}
 
             {data && (
