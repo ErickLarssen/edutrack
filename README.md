@@ -23,7 +23,7 @@ frontend/   → Interface web (React + Vite)
 **Histórico agregado**: uma visão de linha do tempo consolidada por equipamento (empréstimos + devoluções + manutenções em ordem cronológica). Hoje esse histórico já existe de forma distribuída entre os módulos de Empréstimos, Devoluções e Manutenção.
 **Tela de Configurações**: preferências pessoais do usuário logado (troca de senha própria, preferências de exibição).
 **Cancelamento de empréstimo**: decidido conscientemente como fora de escopo, ver Etapa 5 (módulo de Empréstimos).
-**QR Code**: o schema do `Equipamento` já reserva o campo `qrCode` para essa expansão futura (ver Etapa 1 e Etapa 9).
+- Arquitetura pronta para receber: endpoint de busca por QR (`GET /equipamentos?qrCode=...`, reaproveitando o filtro de busca já existente), e uma tela de "leitura rápida" no frontend usando a câmera do dispositivo.
 
 ## Como rodar o projeto
 _(será documentado conforme o backend e frontend forem implementados)_
