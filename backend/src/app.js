@@ -6,7 +6,11 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
-app.use(cors());
+const origensPermitidas = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',')
+    : true;
+
+app.use(cors({ origin: origensPermitidas }));
 app.use(express.json());
 app.use(morgan('dev'));
 
