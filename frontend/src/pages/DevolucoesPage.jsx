@@ -1,11 +1,13 @@
 import { useDevolucoes } from '../hooks/useDevolucoes'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
 import { Badge } from '../components/ui/Badge'
+import { Pagination } from '../components/ui/Pagination'
 import { formatarData } from '../utils/formatDate'
 import { Spinner } from '../components/ui/Spinner'
 
 export function DevolucoesPage() {
-    const { data, isLoading, isError } = useDevolucoes()
+    const [pagina, setPagina] = useState(1)
+    const { data, isLoading, isError } = useDevolucoes({ pagina })
 
     return (
         <div className="flex flex-col gap-6">
@@ -18,6 +20,7 @@ export function DevolucoesPage() {
             {isError && <p className="text-sm text-red-600">Não foi possível carregar as devoluções.</p>}
 
             {data && (
+                <>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -44,6 +47,8 @@ export function DevolucoesPage() {
                         ))}
                     </TableBody>
                 </Table>
+                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                </>
             )}
         </div>
     )

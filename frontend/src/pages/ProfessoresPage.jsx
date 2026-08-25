@@ -3,6 +3,7 @@ import { Plus, Pencil, Ban, RotateCcw } from 'lucide-react'
 import { useProfessores } from '../hooks/useProfessores'
 import { useProfessorMutations } from '../hooks/useProfessorMutations'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
+import { Pagination } from '../components/ui/Pagination'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
@@ -12,12 +13,13 @@ import { Spinner } from '../components/ui/Spinner'
 
 export function ProfessoresPage() {
     const [incluirInativos, setIncluirInativos] = useState(false)
+    const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
     const [professorEditando, setProfessorEditando] = useState(null)
     const [professorParaInativar, setProfessorParaInativar] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useProfessores({ incluirInativos })
+    const { data, isLoading, isError } = useProfessores({ incluirInativos, pagina })
     const { criar, atualizar, inativar, reativar } = useProfessorMutations()
 
     const abrirCriacao = () => {
@@ -78,7 +80,10 @@ export function ProfessoresPage() {
                 <input
                     type="checkbox"
                     checked={incluirInativos}
-                    onChange={(e) => setIncluirInativos(e.target.checked)}
+                    onChange={(e) => {
+                        setIncluirInativos(e.target.checked)
+                        setPagina(1)
+                    }}
                     className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
                 />
                 Mostrar inativos
@@ -89,6 +94,7 @@ export function ProfessoresPage() {
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os professores.</p>}
 
             {data && (
+                <>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -132,6 +138,8 @@ export function ProfessoresPage() {
                         ))}
                     </TableBody>
                 </Table>
+                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                </>
             )}
 
             <Modal

@@ -9,6 +9,7 @@ import { Modal } from '../components/ui/Modal'
 import { ConfirmDialog } from '../components/ui/ConfirmDialog'
 import { UsuarioForm } from '../components/usuarios/UsuarioForm'
 import { ROLE_LABELS } from '../utils/role'
+import { Pagination } from '../components/ui/Pagination'
 import { limparPayload } from '../utils/limparPayload'
 import { useAuth } from '../contexts/AuthContext'
 import { Spinner } from '../components/ui/Spinner'
@@ -21,7 +22,7 @@ export function UsuariosPage() {
     const [usuarioParaInativar, setUsuarioParaInativar] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useUsuarios({ incluirInativos })
+    const { data, isLoading, isError } = useUsuarios({ incluirInativos, pagina })
     const { criar, atualizar, inativar, reativar } = useUsuarioMutations()
 
     const abrirCriacao = () => {
@@ -83,7 +84,10 @@ export function UsuariosPage() {
                 <input
                     type="checkbox"
                     checked={incluirInativos}
-                    onChange={(e) => setIncluirInativos(e.target.checked)}
+                    onChange={(e) => {
+                        setIncluirInativos(e.target.checked)
+                        setPagina(1)
+                    }}
                     className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
                 />
                 Mostrar inativos
@@ -94,6 +98,7 @@ export function UsuariosPage() {
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os usuários.</p>}
 
             {data && (
+                <>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -141,6 +146,8 @@ export function UsuariosPage() {
                         })}
                     </TableBody>
                 </Table>
+                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                </>
             )}
 
             <Modal aberto={modalAberto} onFechar={() => setModalAberto(false)} title={usuarioEditando ? 'Editar usuário' : 'Novo usuário'}>

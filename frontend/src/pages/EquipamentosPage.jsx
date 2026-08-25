@@ -3,6 +3,7 @@ import { Plus, Pencil, Ban, RotateCcw } from 'lucide-react'
 import { useEquipamentos } from '../hooks/useEquipamentos'
 import { useEquipamentoMutations } from '../hooks/useEquipamentoMutations'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
+import { Pagination } from '../components/ui/Pagination'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
@@ -12,12 +13,13 @@ import { STATUS_EQUIPAMENTO, TIPO_EQUIPAMENTO } from '../utils/statusEquipamento
 import { Spinner } from '../components/ui/Spinner'
 
 export function EquipamentosPage() {
+    const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
     const [equipamentoEditando, setEquipamentoEditando] = useState(null)
     const [equipamentoParaInativar, setEquipamentoParaInativar] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useEquipamentos()
+    const { data, isLoading, isError } = useEquipamentos({ pagina })
     const { criar, atualizar, inativar, reativar } = useEquipamentoMutations()
 
     const abrirCriacao = () => {
@@ -79,49 +81,52 @@ export function EquipamentosPage() {
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os equipamentos.</p>}
 
             {data && (
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableHeaderCell>Patrimônio</TableHeaderCell>
-                            <TableHeaderCell>Marca / Modelo</TableHeaderCell>
-                            <TableHeaderCell>Tipo</TableHeaderCell>
-                            <TableHeaderCell>Status</TableHeaderCell>
-                            <TableHeaderCell>Localização</TableHeaderCell>
-                            <TableHeaderCell className="text-right">Ações</TableHeaderCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.dados.map((equipamento) => (
-                            <TableRow key={equipamento.id}>
-                                <TableCell>{equipamento.numeroPatrimonio}</TableCell>
-                                <TableCell>{equipamento.marca} {equipamento.modelo}</TableCell>
-                                <TableCell>{TIPO_EQUIPAMENTO[equipamento.tipo]}</TableCell>
-                                <TableCell>
-                                    <Badge variant={STATUS_EQUIPAMENTO[equipamento.status].variant}>
-                                        {STATUS_EQUIPAMENTO[equipamento.status].label}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell>{equipamento.localizacao || '—'}</TableCell>
-                                <TableCell className="text-right">
-                                    <div className="flex justify-end gap-2">
-                                        <button onClick={() => abrirEdicao(equipamento)} className="text-slate-400 hover:text-brand-600">
-                                            <Pencil className="h-4 w-4" />
-                                        </button>
-                                        {equipamento.status === 'INATIVO' ? (
-                                            <button onClick={() => handleReativar(equipamento)} className="text-slate-400 hover:text-green-600">
-                                                <RotateCcw className="h-4 w-4" />
-                                            </button>
-                                        ) : (
-                                            <button onClick={() => setEquipamentoParaInativar(equipamento)} className="text-slate-400 hover:text-red-600">
-                                                <Ban className="h-4 w-4" />
-                                            </button>
-                                        )}
-                                    </div>
-                                </TableCell>
+                <>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableHeaderCell>Patrimônio</TableHeaderCell>
+                                <TableHeaderCell>Marca / Modelo</TableHeaderCell>
+                                <TableHeaderCell>Tipo</TableHeaderCell>
+                                <TableHeaderCell>Status</TableHeaderCell>
+                                <TableHeaderCell>Localização</TableHeaderCell>
+                                <TableHeaderCell className="text-right">Ações</TableHeaderCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody>
+                            {data.dados.map((equipamento) => (
+                                <TableRow key={equipamento.id}>
+                                    <TableCell>{equipamento.numeroPatrimonio}</TableCell>
+                                    <TableCell>{equipamento.marca} {equipamento.modelo}</TableCell>
+                                    <TableCell>{TIPO_EQUIPAMENTO[equipamento.tipo]}</TableCell>
+                                    <TableCell>
+                                        <Badge variant={STATUS_EQUIPAMENTO[equipamento.status].variant}>
+                                            {STATUS_EQUIPAMENTO[equipamento.status].label}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell>{equipamento.localizacao || '—'}</TableCell>
+                                    <TableCell className="text-right">
+                                        <div className="flex justify-end gap-2">
+                                            <button onClick={() => abrirEdicao(equipamento)} className="text-slate-400 hover:text-brand-600">
+                                                <Pencil className="h-4 w-4" />
+                                            </button>
+                                            {equipamento.status === 'INATIVO' ? (
+                                                <button onClick={() => handleReativar(equipamento)} className="text-slate-400 hover:text-green-600">
+                                                    <RotateCcw className="h-4 w-4" />
+                                                </button>
+                                            ) : (
+                                                <button onClick={() => setEquipamentoParaInativar(equipamento)} className="text-slate-400 hover:text-red-600">
+                                                    <Ban className="h-4 w-4" />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                </>
             )}
 
             <Modal

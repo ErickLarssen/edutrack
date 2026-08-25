@@ -8,18 +8,20 @@ import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { EmprestimoForm } from '../components/emprestimos/EmprestimoForm'
 import { EmprestimoDetalhes } from '../components/emprestimos/EmprestimoDetalhes'
+import { Pagination } from '../components/ui/Pagination'
 import { STATUS_EMPRESTIMO } from '../utils/statusEmprestimo'
 import { formatarData } from '../utils/formatDate'
 import { limparPayload } from '../utils/limparPayload'
 import { Spinner } from '../components/ui/Spinner'
 
 export function EmprestimosPage() {
+    const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
     const [emprestimoEditandoId, setEmprestimoEditandoId] = useState(null)
     const [emprestimoDetalhadoId, setEmprestimoDetalhadoId] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useEmprestimos()
+    const { data, isLoading, isError } = useEmprestimos({ pagina })
     const { criar, atualizar } = useEmprestimoMutations()
 
     const abrirCriacao = () => {
@@ -64,6 +66,7 @@ export function EmprestimosPage() {
             {isError && <p className="text-sm text-red-600">Não foi possível carregar os empréstimos.</p>}
 
             {data && (
+                <>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -101,6 +104,8 @@ export function EmprestimosPage() {
                         ))}
                     </TableBody>
                 </Table>
+                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                </>
             )}
 
             <Modal

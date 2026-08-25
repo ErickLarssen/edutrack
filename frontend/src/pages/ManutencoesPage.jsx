@@ -7,16 +7,18 @@ import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { ManutencaoForm } from '../components/manutencoes/ManutencaoForm'
+import { Pagination } from '../components/ui/Pagination'
 import { STATUS_MANUTENCAO, PRIORIDADE_MANUTENCAO, TRANSICOES_VALIDAS } from '../utils/statusManutencao'
 import { formatarData } from '../utils/formatDate'
 import { Spinner } from '../components/ui/Spinner'
 
 export function ManutencoesPage() {
+    const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
     const [manutencaoEditando, setManutencaoEditando] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useManutencoes()
+    const { data, isLoading, isError } = useManutencoes({ pagina })
     const { criar, atualizar, atualizarStatus } = useManutencaoMutations()
 
     const abrirCriacao = () => {
@@ -69,6 +71,7 @@ export function ManutencoesPage() {
             {isError && <p className="text-sm text-red-600">Não foi possível carregar as manutenções.</p>}
 
             {data && (
+                <>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -127,6 +130,8 @@ export function ManutencoesPage() {
                         ))}
                     </TableBody>
                 </Table>
+                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                </>
             )}
 
             <Modal
