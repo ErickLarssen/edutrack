@@ -17,6 +17,7 @@ import { Spinner } from '../components/ui/Spinner'
 export function UsuariosPage() {
     const { usuario: usuarioLogado } = useAuth()
     const [incluirInativos, setIncluirInativos] = useState(false)
+    const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
     const [usuarioEditando, setUsuarioEditando] = useState(null)
     const [usuarioParaInativar, setUsuarioParaInativar] = useState(null)
@@ -99,54 +100,54 @@ export function UsuariosPage() {
 
             {data && (
                 <>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableHeaderCell>Nome</TableHeaderCell>
-                            <TableHeaderCell>Email</TableHeaderCell>
-                            <TableHeaderCell>Papel</TableHeaderCell>
-                            <TableHeaderCell>Status</TableHeaderCell>
-                            <TableHeaderCell className="text-right">Ações</TableHeaderCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.dados.map((usuario) => {
-                            const ehVoce = usuario.id === usuarioLogado.id
-                            return (
-                                <TableRow key={usuario.id}>
-                                    <TableCell>
-                                        {usuario.nome} {ehVoce && <span className="text-xs text-slate-400">(você)</span>}
-                                    </TableCell>
-                                    <TableCell>{usuario.email}</TableCell>
-                                    <TableCell>{ROLE_LABELS[usuario.role]}</TableCell>
-                                    <TableCell>
-                                        <Badge variant={usuario.ativo ? 'success' : 'neutral'}>
-                                            {usuario.ativo ? 'Ativo' : 'Inativo'}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <div className="flex justify-end gap-2">
-                                            <button onClick={() => abrirEdicao(usuario)} className="text-slate-400 hover:text-brand-600">
-                                                <Pencil className="h-4 w-4" />
-                                            </button>
-                                            {!ehVoce &&
-                                                (usuario.ativo ? (
-                                                    <button onClick={() => setUsuarioParaInativar(usuario)} className="text-slate-400 hover:text-red-600">
-                                                        <Ban className="h-4 w-4" />
-                                                    </button>
-                                                ) : (
-                                                    <button onClick={() => handleReativar(usuario)} className="text-slate-400 hover:text-green-600">
-                                                        <RotateCcw className="h-4 w-4" />
-                                                    </button>
-                                                ))}
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-                            )
-                        })}
-                    </TableBody>
-                </Table>
-                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableHeaderCell>Nome</TableHeaderCell>
+                                <TableHeaderCell>Email</TableHeaderCell>
+                                <TableHeaderCell>Papel</TableHeaderCell>
+                                <TableHeaderCell>Status</TableHeaderCell>
+                                <TableHeaderCell className="text-right">Ações</TableHeaderCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {data.dados.map((usuario) => {
+                                const ehVoce = usuario.id === usuarioLogado.id
+                                return (
+                                    <TableRow key={usuario.id}>
+                                        <TableCell>
+                                            {usuario.nome} {ehVoce && <span className="text-xs text-slate-400">(você)</span>}
+                                        </TableCell>
+                                        <TableCell>{usuario.email}</TableCell>
+                                        <TableCell>{ROLE_LABELS[usuario.role]}</TableCell>
+                                        <TableCell>
+                                            <Badge variant={usuario.ativo ? 'success' : 'neutral'}>
+                                                {usuario.ativo ? 'Ativo' : 'Inativo'}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell className="text-right">
+                                            <div className="flex justify-end gap-2">
+                                                <button onClick={() => abrirEdicao(usuario)} className="text-slate-400 hover:text-brand-600">
+                                                    <Pencil className="h-4 w-4" />
+                                                </button>
+                                                {!ehVoce &&
+                                                    (usuario.ativo ? (
+                                                        <button onClick={() => setUsuarioParaInativar(usuario)} className="text-slate-400 hover:text-red-600">
+                                                            <Ban className="h-4 w-4" />
+                                                        </button>
+                                                    ) : (
+                                                        <button onClick={() => handleReativar(usuario)} className="text-slate-400 hover:text-green-600">
+                                                            <RotateCcw className="h-4 w-4" />
+                                                        </button>
+                                                    ))}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            })}
+                        </TableBody>
+                    </Table>
+                    <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
                 </>
             )}
 
