@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, Pencil, Ban, RotateCcw } from 'lucide-react'
 import { useProfessores } from '../hooks/useProfessores'
+import { useDebouncedValue } from '../hooks/useDebouncedValue'
+import { SearchInput } from '../components/ui/SearchInput'
 import { useProfessorMutations } from '../hooks/useProfessorMutations'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
 import { Pagination } from '../components/ui/Pagination'
@@ -14,12 +16,19 @@ import { Spinner } from '../components/ui/Spinner'
 export function ProfessoresPage() {
     const [incluirInativos, setIncluirInativos] = useState(false)
     const [pagina, setPagina] = useState(1)
+    const [busca, setBusca] = useState('')
+    const buscaComAtraso = useDebouncedValue(busca)
     const [modalAberto, setModalAberto] = useState(false)
     const [professorEditando, setProfessorEditando] = useState(null)
     const [professorParaInativar, setProfessorParaInativar] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useProfessores({ incluirInativos, pagina })
+    const { data, isLoading, isError } = useProfessores({ incluirInativos, pagina, busca: buscaComAtraso || undefined })
+
+    useEffect(() => {
+        setPagina(1)
+    }, [buscaComAtraso])
+
     const { criar, atualizar, inativar, reativar } = useProfessorMutations()
 
     const abrirCriacao = () => {
@@ -76,18 +85,21 @@ export function ProfessoresPage() {
                 </Button>
             </div>
 
-            <label className="flex w-fit items-center gap-2 text-sm text-slate-600">
-                <input
-                    type="checkbox"
-                    checked={incluirInativos}
-                    onChange={(e) => {
-                        setIncluirInativos(e.target.checked)
-                        setPagina(1)
-                    }}
-                    className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
-                />
-                Mostrar inativos
-            </label>
+            <div className="flex flex-wrap items-center gap-4">
+                <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por nome ou disciplina..." />
+                <label className="flex w-fit items-center gap-2 text-sm text-slate-600">
+                    <input
+                        type="checkbox"
+                        checked={incluirInativos}
+                        onChange={(e) => {
+                            setIncluirInativos(e.target.checked)
+                            setPagina(1)
+                        }}
+                        className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+                    />
+                    Mostrar inativos
+                </label>
+            </div>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
             {isLoading && <Spinner />}
@@ -95,50 +107,50 @@ export function ProfessoresPage() {
 
             {data && (
                 <>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableHeaderCell>Nome</TableHeaderCell>
-                            <TableHeaderCell>Disciplina</TableHeaderCell>
-                            <TableHeaderCell>Contato</TableHeaderCell>
-                            <TableHeaderCell>Período</TableHeaderCell>
-                            <TableHeaderCell>Status</TableHeaderCell>
-                            <TableHeaderCell className="text-right">Ações</TableHeaderCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.dados.map((professor) => (
-                            <TableRow key={professor.id}>
-                                <TableCell>{professor.nome}</TableCell>
-                                <TableCell>{professor.disciplina}</TableCell>
-                                <TableCell>{professor.contato || '—'}</TableCell>
-                                <TableCell>{professor.periodo || '—'}</TableCell>
-                                <TableCell>
-                                    <Badge variant={professor.ativo ? 'success' : 'neutral'}>
-                                        {professor.ativo ? 'Ativo' : 'Inativo'}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-right">
-                                    <div className="flex justify-end gap-2">
-                                        <button onClick={() => abrirEdicao(professor)} className="text-slate-400 hover:text-brand-600">
-                                            <Pencil className="h-4 w-4" />
-                                        </button>
-                                        {professor.ativo ? (
-                                            <button onClick={() => setProfessorParaInativar(professor)} className="text-slate-400 hover:text-red-600">
-                                                <Ban className="h-4 w-4" />
-                                            </button>
-                                        ) : (
-                                            <button onClick={() => handleReativar(professor)} className="text-slate-400 hover:text-green-600">
-                                                <RotateCcw className="h-4 w-4" />
-                                            </button>
-                                        )}
-                                    </div>
-                                </TableCell>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableHeaderCell>Nome</TableHeaderCell>
+                                <TableHeaderCell>Disciplina</TableHeaderCell>
+                                <TableHeaderCell>Contato</TableHeaderCell>
+                                <TableHeaderCell>Período</TableHeaderCell>
+                                <TableHeaderCell>Status</TableHeaderCell>
+                                <TableHeaderCell className="text-right">Ações</TableHeaderCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                        </TableHead>
+                        <TableBody>
+                            {data.dados.map((professor) => (
+                                <TableRow key={professor.id}>
+                                    <TableCell>{professor.nome}</TableCell>
+                                    <TableCell>{professor.disciplina}</TableCell>
+                                    <TableCell>{professor.contato || '—'}</TableCell>
+                                    <TableCell>{professor.periodo || '—'}</TableCell>
+                                    <TableCell>
+                                        <Badge variant={professor.ativo ? 'success' : 'neutral'}>
+                                            {professor.ativo ? 'Ativo' : 'Inativo'}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell className="text-right">
+                                        <div className="flex justify-end gap-2">
+                                            <button onClick={() => abrirEdicao(professor)} className="text-slate-400 hover:text-brand-600">
+                                                <Pencil className="h-4 w-4" />
+                                            </button>
+                                            {professor.ativo ? (
+                                                <button onClick={() => setProfessorParaInativar(professor)} className="text-slate-400 hover:text-red-600">
+                                                    <Ban className="h-4 w-4" />
+                                                </button>
+                                            ) : (
+                                                <button onClick={() => handleReativar(professor)} className="text-slate-400 hover:text-green-600">
+                                                    <RotateCcw className="h-4 w-4" />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
                 </>
             )}
 

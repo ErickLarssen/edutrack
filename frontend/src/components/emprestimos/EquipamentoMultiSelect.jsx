@@ -1,8 +1,13 @@
+import { useState } from 'react'
 import { Controller } from 'react-hook-form'
 import { useEquipamentos } from '../../hooks/useEquipamentos'
+import { useDebouncedValue } from '../../hooks/useDebouncedValue'
+import { SearchInput } from '../ui/SearchInput'
 
 export function EquipamentoMultiSelect({ control, error }) {
-    const { data, isLoading } = useEquipamentos({ status: 'DISPONIVEL', limite: 100 })
+    const [busca, setBusca] = useState('')
+    const buscaComAtraso = useDebouncedValue(busca)
+    const { data, isLoading } = useEquipamentos({ status: 'DISPONIVEL', limite: 50, busca: buscaComAtraso || undefined })
 
     return (
         <Controller
@@ -22,6 +27,7 @@ export function EquipamentoMultiSelect({ control, error }) {
                 return (
                     <div className="flex flex-col gap-1.5">
                         <label className="text-sm font-medium text-slate-700">Equipamentos disponíveis</label>
+                        <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio..." />
                         <div className="max-h-56 overflow-y-auto rounded-lg border border-slate-300">
                             {isLoading && <p className="p-3 text-sm text-slate-500">Carregando...</p>}
                             {data?.dados.length === 0 && (

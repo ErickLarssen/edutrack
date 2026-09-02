@@ -39,8 +39,13 @@ const criarComEfeitos = async ({ emprestimoItemId, equipamentoId, emprestimoId, 
     });
 };
 
-const listar = async ({ conferencia, pagina = 1, limite = 20 }) => {
-    const where = { ...(conferencia && { conferencia }) };
+const listar = async ({ conferencia, busca, pagina = 1, limite = 20 }) => {
+    const where = {
+        ...(conferencia && { conferencia }),
+        ...(busca && {
+            emprestimoItem: { equipamento: { numeroPatrimonio: { contains: busca } } },
+        }),
+    };
 
     const [dados, total] = await Promise.all([
         prisma.devolucao.findMany({

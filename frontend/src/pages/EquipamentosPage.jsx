@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, Pencil, Ban, RotateCcw } from 'lucide-react'
 import { useEquipamentos } from '../hooks/useEquipamentos'
+import { useDebouncedValue } from '../hooks/useDebouncedValue'
+import { SearchInput } from '../components/ui/SearchInput'
 import { useEquipamentoMutations } from '../hooks/useEquipamentoMutations'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
 import { Pagination } from '../components/ui/Pagination'
@@ -14,12 +16,18 @@ import { Spinner } from '../components/ui/Spinner'
 
 export function EquipamentosPage() {
     const [pagina, setPagina] = useState(1)
+    const [busca, setBusca] = useState('')
+    const buscaComAtraso = useDebouncedValue(busca)
     const [modalAberto, setModalAberto] = useState(false)
     const [equipamentoEditando, setEquipamentoEditando] = useState(null)
     const [equipamentoParaInativar, setEquipamentoParaInativar] = useState(null)
     const [erro, setErro] = useState('')
 
-    const { data, isLoading, isError } = useEquipamentos({ pagina })
+    const { data, isLoading, isError } = useEquipamentos({ pagina, busca: buscaComAtraso || undefined })
+    useEffect(() => {
+        setPagina(1)
+    }, [buscaComAtraso])
+
     const { criar, atualizar, inativar, reativar } = useEquipamentoMutations()
 
     const abrirCriacao = () => {
@@ -75,6 +83,8 @@ export function EquipamentosPage() {
                     <Plus className="h-4 w-4" /> Novo equipamento
                 </Button>
             </div>
+
+            <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio, série, marca..." />
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
             {isLoading && <Spinner />}

@@ -7,7 +7,7 @@ import { useEquipamentos } from '../../hooks/useEquipamentos'
 
 export function ManutencaoForm({ manutencao, onSubmit, enviando }) {
     const modoEdicao = !!manutencao
-    const { data: equipamentosData } = useEquipamentos({ status: 'DISPONIVEL', limite: 100 })
+    const { data: equipamentosData } = useEquipamentos({ status: 'DISPONIVEL', limite: 500 })
 
     const {
         register,

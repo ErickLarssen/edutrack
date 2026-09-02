@@ -23,6 +23,7 @@ const registrarDevolucaoSchema = z.object({
 const listarDevolucoesSchema = z.object({
     query: z.object({
         conferencia: z.enum(['OK', 'COM_PROBLEMA']).optional(),
+        busca: z.string().optional(),
         pagina: z.coerce.number().int().positive().optional(),
         limite: z.coerce.number().int().positive().max(100).optional(),
     }),
