@@ -22,10 +22,11 @@ const buscarPorId = (id) => {
     return prisma.equipamento.findUnique({ where: { id } });
 };
 
-const listar = async ({ status, tipo, busca, pagina = 1, limite = 20 }) => {
+const listar = async ({ status, tipo, busca, semQrCode, pagina = 1, limite = 20 }) => {
     const where = {
         ...(status && { status }),
         ...(tipo && { tipo }),
+        ...(semQrCode && { qrCode: null }),
         ...(busca && {
             OR: [
                 { numeroPatrimonio: { contains: busca } },

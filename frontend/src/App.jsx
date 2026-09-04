@@ -11,6 +11,7 @@ import { DevolucoesPage } from './pages/DevolucoesPage'
 import { ManutencoesPage } from './pages/ManutencoesPage'
 import { RelatoriosPage } from './pages/RelatoriosPage'
 import { UsuariosPage } from './pages/UsuariosPage'
+import { EtiquetasPage } from './pages/EtiquetasPage'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/manutencoes" element={<ManutencoesPage />} />
           <Route path="/relatorios" element={<RelatoriosPage />} />
           <Route path="/usuarios" element={<UsuariosPage />} />
+          <Route path="/etiquetas" element={<EtiquetasPage />} />
         </Route>
       </Route>
     </Routes>

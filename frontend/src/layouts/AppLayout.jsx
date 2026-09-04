@@ -11,9 +11,9 @@ export function AppLayout() {
         <div className="min-h-screen bg-slate-50">
             <Sidebar aberta={sidebarAberta} onFechar={() => setSidebarAberta(false)} />
 
-            <div className="md:pl-64">
+            <div className="md:pl-64 print:pl-0">
                 <Topbar onAbrirMenu={() => setSidebarAberta(true)} />
-                <main className="p-6">
+                <main className="p-6 print:p-0">
                     <PageTransition />
                 </main>
             </div>

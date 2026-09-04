@@ -8,6 +8,7 @@ import {
     Wrench,
     BarChart3,
     UserCog,
+    QrCode, 
     X,
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
@@ -16,6 +17,7 @@ import { cn } from '../utils/cn'
 const NAV_ITEMS = [
     { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
     { to: '/equipamentos', label: 'Equipamentos', icon: Laptop },
+    { to: '/etiquetas', label: 'Etiquetas', icon: QrCode },
     { to: '/professores', label: 'Professores', icon: GraduationCap },
     { to: '/emprestimos', label: 'Empréstimos', icon: ArrowRightLeft },
     { to: '/devolucoes', label: 'Devoluções', icon: Undo2 },
@@ -30,11 +32,11 @@ export function Sidebar({ aberta, onFechar }) {
 
     return (
         <>
-            {aberta && <div className="fixed inset-0 z-30 bg-slate-900/40 md:hidden" onClick={onFechar} />}
+            {aberta && <div className="fixed inset-0 z-30 bg-slate-900/40 md:hidden print:hidden" onClick={onFechar} />}
 
             <aside
                 className={cn(
-                    'fixed inset-y-0 left-0 z-40 w-64 -translate-x-full border-r border-slate-200 bg-white transition-transform duration-200 md:translate-x-0',
+                    'fixed inset-y-0 left-0 z-40 w-64 -translate-x-full border-r border-slate-200 bg-white transition-transform duration-200 md:translate-x-0 print:hidden',
                     aberta && 'translate-x-0'
                 )}
             >

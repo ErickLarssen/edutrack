@@ -1,4 +1,5 @@
 const { z } = require('zod');
+const { booleanoDeQuery } = require('./shared');
 
 const TIPOS = ['TABLET', 'NOTEBOOK', 'CHROMEBOOK'];
 const STATUS = ['DISPONIVEL', 'EMPRESTADO', 'MANUTENCAO', 'INATIVO'];
@@ -37,6 +38,7 @@ const listarEquipamentosSchema = z.object({
         status: z.enum(STATUS).optional(),
         tipo: z.enum(TIPOS).optional(),
         busca: z.string().optional(),
+        semQrCode: booleanoDeQuery.optional(),
         pagina: z.coerce.number().int().positive().optional(),
         limite: z.coerce.number().int().positive().max(100).optional(),
     }),

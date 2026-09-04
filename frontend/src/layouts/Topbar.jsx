@@ -6,7 +6,7 @@ export function Topbar({ onAbrirMenu }) {
     const { usuario, logout } = useAuth()
 
     return (
-        <header className="flex h-16 items-center border-b border-slate-200 bg-white px-6">
+        <header className="flex h-16 items-center border-b border-slate-200 bg-white px-6 print:hidden">
             <button onClick={onAbrirMenu} className="md:hidden">
                 <Menu className="h-5 w-5 text-slate-600" />
             </button>
