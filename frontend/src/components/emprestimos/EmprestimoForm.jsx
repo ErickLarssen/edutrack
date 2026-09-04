@@ -6,6 +6,7 @@ import { Button } from '../ui/Button'
 import { EquipamentoMultiSelect } from './EquipamentoMultiSelect'
 import { useProfessores } from '../../hooks/useProfessores'
 import { useEmprestimo } from '../../hooks/useEmprestimo'
+import { hojeLocal } from '../../utils/hojeLocal'
 
 export function EmprestimoForm({ emprestimoId, onSubmit, enviando }) {
     const modoEdicao = !!emprestimoId
@@ -43,7 +44,7 @@ function EmprestimoFormCampos({ modoEdicao, emprestimo, onSubmit, enviando }) {
             : {
                 professorId: '',
                 equipamentoIds: [],
-                data: new Date().toISOString().slice(0, 10),
+                data: hojeLocal(),
                 hora: new Date().toTimeString().slice(0, 5),
                 sala: '',
                 turma: '',
@@ -59,7 +60,9 @@ function EmprestimoFormCampos({ modoEdicao, emprestimo, onSubmit, enviando }) {
 
         if (payload.previsaoDevolucao) {
             const dataFormatada = new Date(dataBase).toISOString().slice(0, 10)
-            payload.previsaoDevolucao = `${dataFormatada}T${payload.previsaoDevolucao}:00`
+            // Horário de Brasília (UTC-3), o Brasil não tem mais horário de verão desde 2019,
+            // então esse deslocamento fixo é seguro para uma escola que opera num único fuso.
+            payload.previsaoDevolucao = `${dataFormatada}T${payload.previsaoDevolucao}:00-03:00`
         }
 
         onSubmit(payload)
