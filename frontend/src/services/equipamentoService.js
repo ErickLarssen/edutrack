@@ -21,4 +21,9 @@ export const equipamentoService = {
         const { data } = await api.patch(`/equipamentos/${id}/reativar`)
         return data.data
     },
+
+    buscarPorPatrimonio: async (numeroPatrimonio) => {
+        const { data } = await api.get(`/equipamentos/patrimonio/${encodeURIComponent(numeroPatrimonio)}`)
+        return data.data
+    },
 }

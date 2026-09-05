@@ -54,4 +54,13 @@ const reativar = async (req, res, next) => {
     }
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar, deletar, reativar };
+const buscarPorPatrimonio = async (req, res, next) => {
+    try {
+        const equipamento = await equipamentoService.buscarPorNumeroPatrimonio(req.params.numeroPatrimonio);
+        res.json({ success: true, data: equipamento });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, deletar, reativar, buscarPorPatrimonio };

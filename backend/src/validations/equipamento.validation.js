@@ -44,4 +44,14 @@ const listarEquipamentosSchema = z.object({
     }),
 });
 
-module.exports = { criarEquipamentoSchema, atualizarEquipamentoSchema, idParamSchema, listarEquipamentosSchema };
+const buscarPorPatrimonioSchema = z.object({
+    params: z.object({ numeroPatrimonio: z.string().min(1, 'Número de patrimônio é obrigatório') }),
+});
+
+module.exports = {
+    criarEquipamentoSchema,
+    atualizarEquipamentoSchema,
+    idParamSchema,
+    listarEquipamentosSchema,
+    buscarPorPatrimonioSchema,
+};

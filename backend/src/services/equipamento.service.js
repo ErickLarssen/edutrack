@@ -65,4 +65,12 @@ const reativar = async (id) => {
     return equipamentoRepository.reativar(id);
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar, inativar, reativar };
+const buscarPorNumeroPatrimonio = async (numeroPatrimonio) => {
+    const equipamento = await equipamentoRepository.buscarPorPatrimonio(numeroPatrimonio);
+    if (!equipamento) {
+        throw new AppError('Equipamento não encontrado para esse patrimônio', 404);
+    }
+    return equipamento;
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, inativar, reativar, buscarPorNumeroPatrimonio };

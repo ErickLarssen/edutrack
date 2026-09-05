@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Plus, Eye, Pencil } from 'lucide-react'
+import { Plus, Eye, Pencil, ScanLine } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useEmprestimos } from '../hooks/useEmprestimos'
 import { useEmprestimoMutations } from '../hooks/useEmprestimoMutations'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
@@ -15,6 +16,7 @@ import { limparPayload } from '../utils/limparPayload'
 import { Spinner } from '../components/ui/Spinner'
 
 export function EmprestimosPage() {
+    const navigate = useNavigate()
     const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
     const [emprestimoEditandoId, setEmprestimoEditandoId] = useState(null)
@@ -39,7 +41,7 @@ export function EmprestimosPage() {
         const payloadLimpo = limparPayload(payload)
         try {
             if (emprestimoEditandoId) {
-                +        await atualizar.mutateAsync({ id: emprestimoEditandoId, payload: payloadLimpo })
+                    await atualizar.mutateAsync({ id: emprestimoEditandoId, payload: payloadLimpo })
             } else {
                 await criar.mutateAsync(payloadLimpo)
             }
@@ -51,14 +53,19 @@ export function EmprestimosPage() {
 
     return (
         <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                     <h1 className="text-2xl font-semibold text-slate-900">Empréstimos</h1>
                     <p className="text-sm text-slate-500">Registro de retirada de equipamentos</p>
                 </div>
-                <Button onClick={abrirCriacao}>
-                    <Plus className="h-4 w-4" /> Novo empréstimo
-                </Button>
+                <div className="flex gap-2">
+                    <Button variant="secondary" onClick={() => navigate('/emprestimos/scanner')}>
+                        <ScanLine className="h-4 w-4" /> Registrar com QR Code
+                    </Button>
+                    <Button onClick={abrirCriacao}>
+                        <Plus className="h-4 w-4" /> Novo empréstimo
+                    </Button>
+                </div>
             </div>
 
             {erro && <p className="text-sm text-red-600">{erro}</p>}
@@ -67,44 +74,44 @@ export function EmprestimosPage() {
 
             {data && (
                 <>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableHeaderCell>Professor</TableHeaderCell>
-                            <TableHeaderCell>Data</TableHeaderCell>
-                            <TableHeaderCell>Sala / Turma</TableHeaderCell>
-                            <TableHeaderCell>Itens</TableHeaderCell>
-                            <TableHeaderCell>Status</TableHeaderCell>
-                            <TableHeaderCell className="text-right">Ações</TableHeaderCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.dados.map((emprestimo) => (
-                            <TableRow key={emprestimo.id}>
-                                <TableCell>{emprestimo.professor.nome}</TableCell>
-                                <TableCell>{formatarData(emprestimo.data)}</TableCell>
-                                <TableCell>{[emprestimo.sala, emprestimo.turma].filter(Boolean).join(' / ') || '—'}</TableCell>
-                                <TableCell>{emprestimo.itens.length}</TableCell>
-                                <TableCell>
-                                    <Badge variant={STATUS_EMPRESTIMO[emprestimo.status].variant}>
-                                        {STATUS_EMPRESTIMO[emprestimo.status].label}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-right">
-                                    <div className="flex justify-end gap-2">
-                                        <button onClick={() => setEmprestimoDetalhadoId(emprestimo.id)} className="text-slate-400 hover:text-brand-600">
-                                            <Eye className="h-4 w-4" />
-                                        </button>
-                                        <button onClick={() => abrirEdicao(emprestimo)} className="text-slate-400 hover:text-brand-600">
-                                            <Pencil className="h-4 w-4" />
-                                        </button>
-                                    </div>
-                                </TableCell>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableHeaderCell>Professor</TableHeaderCell>
+                                <TableHeaderCell>Data</TableHeaderCell>
+                                <TableHeaderCell>Sala / Turma</TableHeaderCell>
+                                <TableHeaderCell>Itens</TableHeaderCell>
+                                <TableHeaderCell>Status</TableHeaderCell>
+                                <TableHeaderCell className="text-right">Ações</TableHeaderCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
+                        </TableHead>
+                        <TableBody>
+                            {data.dados.map((emprestimo) => (
+                                <TableRow key={emprestimo.id}>
+                                    <TableCell>{emprestimo.professor.nome}</TableCell>
+                                    <TableCell>{formatarData(emprestimo.data)}</TableCell>
+                                    <TableCell>{[emprestimo.sala, emprestimo.turma].filter(Boolean).join(' / ') || '—'}</TableCell>
+                                    <TableCell>{emprestimo.itens.length}</TableCell>
+                                    <TableCell>
+                                        <Badge variant={STATUS_EMPRESTIMO[emprestimo.status].variant}>
+                                            {STATUS_EMPRESTIMO[emprestimo.status].label}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell className="text-right">
+                                        <div className="flex justify-end gap-2">
+                                            <button onClick={() => setEmprestimoDetalhadoId(emprestimo.id)} className="text-slate-400 hover:text-brand-600">
+                                                <Eye className="h-4 w-4" />
+                                            </button>
+                                            <button onClick={() => abrirEdicao(emprestimo)} className="text-slate-400 hover:text-brand-600">
+                                                <Pencil className="h-4 w-4" />
+                                            </button>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Pagination pagina={data.pagina} limite={data.limite} total={data.total} onChange={setPagina} />
                 </>
             )}
 

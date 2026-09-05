@@ -7,6 +7,7 @@ import { ProtectedRoute } from './routes/ProtectedRoute'
 import { AppLayout } from './layouts/AppLayout'
 import { ProfessoresPage } from './pages/ProfessoresPage'
 import { EmprestimosPage } from './pages/EmprestimosPage'
+import { EmprestimoScannerPage } from './pages/EmprestimoScannerPage'
 import { DevolucoesPage } from './pages/DevolucoesPage'
 import { ManutencoesPage } from './pages/ManutencoesPage'
 import { RelatoriosPage } from './pages/RelatoriosPage'
@@ -24,6 +25,7 @@ function App() {
           <Route path="/equipamentos" element={<EquipamentosPage />} />
           <Route path="/professores" element={<ProfessoresPage />} />
           <Route path="/emprestimos" element={<EmprestimosPage />} />
+          <Route path="/emprestimos/scanner" element={<EmprestimoScannerPage />} />
           <Route path="/devolucoes" element={<DevolucoesPage />} />
           <Route path="/manutencoes" element={<ManutencoesPage />} />
           <Route path="/relatorios" element={<RelatoriosPage />} />

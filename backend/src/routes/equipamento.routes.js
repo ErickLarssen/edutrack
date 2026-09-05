@@ -10,12 +10,14 @@ const {
     atualizarEquipamentoSchema,
     idParamSchema,
     listarEquipamentosSchema,
+    buscarPorPatrimonioSchema,
 } = require('../validations/equipamento.validation');
 
 router.use(authenticate);
 
 router.get('/', validate(listarEquipamentosSchema), equipamentoController.listar);
 router.get('/:id', validate(idParamSchema), equipamentoController.buscarPorId);
+router.get('/patrimonio/:numeroPatrimonio', validate(buscarPorPatrimonioSchema), equipamentoController.buscarPorPatrimonio);
 router.post('/', authorize('ADMIN', 'ESTAGIARIO'), validate(criarEquipamentoSchema), equipamentoController.criar);
 router.put('/:id', authorize('ADMIN', 'ESTAGIARIO'), validate(atualizarEquipamentoSchema), equipamentoController.atualizar);
 router.delete('/:id', authorize('ADMIN'), validate(idParamSchema), equipamentoController.deletar);
