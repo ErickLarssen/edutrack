@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GraduationCap, Laptop, ArrowRightLeft, BarChart3 } from 'lucide-react'
+import { Laptop, ArrowRightLeft, BarChart3 } from 'lucide-react'
 import { Card, CardHeader, CardContent } from '../components/ui/Card'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
@@ -41,14 +41,11 @@ export function LoginPage() {
                     className="pointer-events-none absolute inset-0 opacity-20"
                     style={{
                         backgroundImage:
-                            'radial-gradient(circle at 20% 20%, rgba(99,102,241,0.5), transparent 40%), radial-gradient(circle at 80% 70%, rgba(99,102,241,0.35), transparent 45%)',
+                            'radial-gradient(circle at 20% 20%, rgba(6,189,188,0.45), transparent 40%), radial-gradient(circle at 80% 70%, rgba(0,152,112,0.4), transparent 45%)',
                     }}
                 />
-                <div className="relative flex items-center gap-2">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
-                        <GraduationCap className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="text-lg font-semibold">EduTrack</span>
+                <div className="relative flex items-center">
+                    <img src="/logo-proadesk.png" alt="Proadesk" className="h-11 w-auto" />
                 </div>
 
                 <div className="relative flex flex-col gap-8">
@@ -82,11 +79,8 @@ export function LoginPage() {
             <div className="flex items-center justify-center bg-slate-50 p-6">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
-                        <div className="mb-1 flex items-center gap-2 lg:hidden">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
-                                <GraduationCap className="h-4 w-4 text-white" />
-                            </div>
-                            <span className="text-base font-semibold text-brand-600">EduTrack</span>
+                        <div className="mb-1 flex items-center lg:hidden">
+                            <img src="/logo-proadesk.png" alt="Proadesk" className="h-8 w-auto" />
                         </div>
                         <h1 className="text-lg font-semibold text-slate-900">Bem-vindo de volta</h1>
                         <p className="text-sm text-slate-500">Entre com sua conta para continuar</p>

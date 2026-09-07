@@ -1,6 +1,6 @@
-# EduTrack
+# ProaDesk
 
-Sistema web de gestão de equipamentos escolares — controle de empréstimo, devolução e manutenção de tablets, notebooks e Chromebooks, desenvolvido para o Programa PROATI da rede estadual de ensino de São Paulo.
+Sistema web de gestão de equipamentos escolares, controle de empréstimo, devolução e manutenção de tablets, notebooks e Chromebooks, desenvolvido para o Programa PROATI da rede estadual de ensino de São Paulo.
 
 [![Testes](https://github.com/ErickLarssen/edutrack/actions/workflows/tests.yml/badge.svg)](https://github.com/ErickLarssen/edutrack/actions/workflows/tests.yml)
 
@@ -129,7 +129,7 @@ O plano gratuito do Aiven desliga o serviço automaticamente após períodos de 
 
 ## Contexto
 
-Projeto desenvolvido por Erick Larssen, estagiário PROATI da Secretaria da Educação do Estado de São Paulo, como parte de seu portfólio como desenvolvedor Full-Stack — e em uso real na escola onde atua.
+Projeto desenvolvido por Erick Silva, estagiário PROATI da Secretaria da Educação do Estado de São Paulo, como parte de seu portfólio como desenvolvedor Full-Stack, e em uso real na escola onde atua.
 
 ## Licença
 

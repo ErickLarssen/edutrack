@@ -8,7 +8,7 @@ import {
     Wrench,
     BarChart3,
     UserCog,
-    QrCode, 
+    QrCode,
     X,
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
@@ -41,7 +41,13 @@ export function Sidebar({ aberta, onFechar }) {
                 )}
             >
                 <div className="flex h-16 items-center justify-between border-b border-slate-200 px-6">
-                    <span className="text-lg font-semibold text-brand-600">EduTrack</span>
+                    <div className="relative flex items-center">
+                        <span
+                            className="pointer-events-none absolute -inset-3 -z-10 rounded-full opacity-30 blur-xl"
+                            style={{ background: 'radial-gradient(circle, #06bdbc, #009870 70%, transparent 100%)' }}
+                        />
+                        <img src="/logo-proadesk.png" alt="Proadesk" className="h-9 w-auto" />
+                    </div>
                     <button onClick={onFechar} className="md:hidden">
                         <X className="h-5 w-5 text-slate-500" />
                     </button>
