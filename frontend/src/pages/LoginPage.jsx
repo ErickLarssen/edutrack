@@ -45,7 +45,7 @@ export function LoginPage() {
                     }}
                 />
                 <div className="relative flex items-center">
-                    <img src="/logo-proadesk.png" alt="Proadesk" className="h-11 w-auto" />
+                    <img src="/logo-proadesk.png" alt="Proadesk" className="h-60 w-auto" />
                 </div>
 
                 <div className="relative flex flex-col gap-8">
