@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Scanner } from '@yudiel/react-qr-scanner'
 import { X, Check } from 'lucide-react'
@@ -33,6 +33,11 @@ export function EmprestimoScannerPage() {
     const [manualInput, setManualInput] = useState('')
     const [erroScan, setErroScan] = useState('')
     const [enviando, setEnviando] = useState(false)
+    const fimListaRef = useRef(null)
+
+    useEffect(() => {
+        fimListaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }, [itensCarrinho.length])
 
     const iniciarScanner = (event) => {
         event.preventDefault()
@@ -218,7 +223,7 @@ export function EmprestimoScannerPage() {
                                 Equipamentos escaneados ({itensCarrinho.length})
                             </h2>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-2">
+                        <CardContent className="flex max-h-72 flex-col gap-2 overflow-y-auto">
                             {itensCarrinho.length === 0 && (
                                 <p className="text-sm text-slate-500">Nenhum equipamento escaneado ainda.</p>
                             )}
@@ -233,6 +238,7 @@ export function EmprestimoScannerPage() {
                                     </button>
                                 </div>
                             ))}
+                            <div ref={fimListaRef} />
                         </CardContent>
                     </Card>
 
