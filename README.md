@@ -4,7 +4,7 @@ Sistema web de gestão de equipamentos escolares, controle de empréstimo, devol
 
 [![Testes](https://github.com/ErickLarssen/edutrack/actions/workflows/tests.yml/badge.svg)](https://github.com/ErickLarssen/edutrack/actions/workflows/tests.yml)
 
-**🔗 Aplicação em produção:** [edutrack-seven-gamma.vercel.app](https://edutrack-seven-gamma.vercel.app)
+**🔗 Aplicação em produção:** [edutrack-seven-gamma.vercel.app]([[https://edutrack-seven-gamma.vercel.app]](https://proadesk.tech)
 
 ## O problema
 
