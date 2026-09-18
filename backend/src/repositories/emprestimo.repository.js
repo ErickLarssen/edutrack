@@ -72,4 +72,36 @@ const buscarItemPorId = (itemId) => {
     });
 };
 
-module.exports = { criarComItens, buscarPorId, listar, atualizar, buscarItemPorId };
+const buscarItemAtivoPorEquipamentoId = (equipamentoId) => {
+    return prisma.emprestimoItem.findFirst({
+        where: { equipamentoId, devolucao: null },
+        include: {
+            equipamento: true,
+            emprestimo: { include: { professor: true } },
+        },
+    });
+};
+
+const adicionarItens = async (emprestimoId, equipamentoIds) => {
+    return prisma.$transaction(async (tx) => {
+        await tx.emprestimoItem.createMany({
+            data: equipamentoIds.map((equipamentoId) => ({ emprestimoId, equipamentoId })),
+        });
+
+        await tx.equipamento.updateMany({
+            where: { id: { in: equipamentoIds } },
+            data: { status: 'EMPRESTADO' },
+        });
+
+        return tx.emprestimo.findUnique({
+            where: { id: emprestimoId },
+            include: {
+                professor: true,
+                usuario: { select: { id: true, nome: true, email: true } },
+                itens: { include: { equipamento: true, devolucao: true } },
+            },
+        });
+    });
+};
+
+module.exports = { criarComItens, buscarPorId, listar, atualizar, buscarItemPorId, buscarItemAtivoPorEquipamentoId, adicionarItens };

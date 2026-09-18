@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ScanLine } from 'lucide-react'
 import { useDevolucoes } from '../hooks/useDevolucoes'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { SearchInput } from '../components/ui/SearchInput'
 import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from '../components/ui/Table'
 import { Badge } from '../components/ui/Badge'
+import { Button } from '../components/ui/Button'
 import { Pagination } from '../components/ui/Pagination'
-import { formatarData } from '../utils/formatDate'
 import { Spinner } from '../components/ui/Spinner'
+import { formatarData } from '../utils/formatDate'
 
 export function DevolucoesPage() {
+    const navigate = useNavigate()
     const [pagina, setPagina] = useState(1)
     const [busca, setBusca] = useState('')
-    const buscaComAtraso = useDebouncedValue(busca)
+    const buscaComAtraso = useDebouncedValue(busca) 
     const { data, isLoading, isError } = useDevolucoes({ pagina, busca: buscaComAtraso || undefined })
 
     useEffect(() => {
@@ -24,6 +28,10 @@ export function DevolucoesPage() {
                 <h1 className="text-2xl font-semibold text-slate-900">Devoluções</h1>
                 <p className="text-sm text-slate-500">Histórico de devoluções registradas</p>
             </div>
+
+            <Button variant="secondary" className="w-fit" onClick={() => navigate('/devolucoes/scanner')}>
+                <ScanLine className="h-4 w-4" /> Devolver com QR Code
+            </Button>
 
             <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio..." />
 

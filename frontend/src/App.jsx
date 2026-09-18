@@ -9,6 +9,7 @@ import { ProfessoresPage } from './pages/ProfessoresPage'
 import { EmprestimosPage } from './pages/EmprestimosPage'
 import { EmprestimoScannerPage } from './pages/EmprestimoScannerPage'
 import { DevolucoesPage } from './pages/DevolucoesPage'
+import { DevolucaoScannerPage } from './pages/DevolucaoScannerPage'
 import { ManutencoesPage } from './pages/ManutencoesPage'
 import { RelatoriosPage } from './pages/RelatoriosPage'
 import { UsuariosPage } from './pages/UsuariosPage'
@@ -27,6 +28,7 @@ function App() {
           <Route path="/emprestimos" element={<EmprestimosPage />} />
           <Route path="/emprestimos/scanner" element={<EmprestimoScannerPage />} />
           <Route path="/devolucoes" element={<DevolucoesPage />} />
+          <Route path="/devolucoes/scanner" element={<DevolucaoScannerPage />} />
           <Route path="/manutencoes" element={<ManutencoesPage />} />
           <Route path="/relatorios" element={<RelatoriosPage />} />
           <Route path="/usuarios" element={<UsuariosPage />} />

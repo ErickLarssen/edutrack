@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useEmprestimo } from '../../hooks/useEmprestimo'
 import { useDevolucaoMutations } from '../../hooks/useDevolucaoMutations'
+import { useEmprestimoMutations } from '../../hooks/useEmprestimoMutations'
+import { AdicionarEquipamentoPanel } from './AdicionarEquipamentoPanel'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Modal } from '../ui/Modal'
@@ -10,7 +12,9 @@ import { formatarData } from '../../utils/formatDate'
 export function EmprestimoDetalhes({ id }) {
     const { data: emprestimo, isLoading, isError } = useEmprestimo(id)
     const { registrar } = useDevolucaoMutations()
+    const { adicionarItens } = useEmprestimoMutations()
     const [itemDevolvendo, setItemDevolvendo] = useState(null)
+    const [adicionando, setAdicionando] = useState(false)
     const [erro, setErro] = useState('')
 
     if (isLoading) return <p className="text-sm text-slate-500">Carregando...</p>
@@ -26,6 +30,16 @@ export function EmprestimoDetalhes({ id }) {
         }
     }
 
+    const handleAdicionarEquipamentos = async (equipamentoIds) => {
+        setErro('')
+        try {
+            await adicionarItens.mutateAsync({ id, equipamentoIds })
+            setAdicionando(false)
+        } catch (error) {
+            setErro(error.response?.data?.error?.message || 'Erro ao adicionar equipamento.')
+        }
+    }
+
     return (
         <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3 text-sm">
@@ -38,7 +52,25 @@ export function EmprestimoDetalhes({ id }) {
             {erro && <p className="text-sm text-red-600">{erro}</p>}
 
             <div>
-                <h3 className="mb-2 text-sm font-semibold text-slate-900">Equipamentos</h3>
+                <div className="mb-2 flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-slate-900">Equipamentos</h3>
+                    {emprestimo.status === 'ATIVO' && !adicionando && (
+                        <button onClick={() => setAdicionando(true)} className="text-xs font-medium text-brand-600 hover:underline">
+                            + Adicionar equipamento
+                        </button>
+                    )}
+                </div>
+
+                {adicionando && (
+                    <div className="mb-3">
+                        <AdicionarEquipamentoPanel
+                            onConfirmar={handleAdicionarEquipamentos}
+                            onCancelar={() => setAdicionando(false)}
+                            enviando={adicionarItens.isPending}
+                        />
+                    </div>
+                )}
+
                 <div className="flex flex-col gap-2">
                     {emprestimo.itens.map((item) => (
                         <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">

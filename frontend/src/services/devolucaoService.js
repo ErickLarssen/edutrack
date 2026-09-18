@@ -16,4 +16,9 @@ export const devolucaoService = {
         const { data } = await api.get('/devolucoes', { params: filtros })
         return data.data
     },
+
+    buscarItemPorPatrimonio: async (numeroPatrimonio) => {
+        const { data } = await api.get(`/devolucoes/item-por-patrimonio/${encodeURIComponent(numeroPatrimonio)}`)
+        return data.data
+    },
 }

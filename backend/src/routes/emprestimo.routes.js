@@ -11,6 +11,7 @@ const {
     atualizarEmprestimoSchema,
     idParamSchema,
     listarEmprestimosSchema,
+    adicionarItensSchema,
 } = require('../validations/emprestimo.validation');
 const { registrarDevolucaoSchema } = require('../validations/devolucao.validation');
 
@@ -20,6 +21,7 @@ router.get('/', validate(listarEmprestimosSchema), emprestimoController.listar);
 router.get('/:id', validate(idParamSchema), emprestimoController.buscarPorId);
 router.post('/', authorize('ADMIN', 'ESTAGIARIO'), validate(criarEmprestimoSchema), emprestimoController.criar);
 router.put('/:id', authorize('ADMIN', 'ESTAGIARIO'), validate(atualizarEmprestimoSchema), emprestimoController.atualizar);
+router.post('/:id/itens', authorize('ADMIN', 'ESTAGIARIO'), validate(adicionarItensSchema), emprestimoController.adicionarItens);
 
 router.post(
     '/:emprestimoId/itens/:itemId/devolucoes',

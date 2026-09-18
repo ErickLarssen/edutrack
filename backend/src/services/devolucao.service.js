@@ -1,6 +1,7 @@
 const AppError = require('../utils/AppError');
 const devolucaoRepository = require('../repositories/devolucao.repository');
 const emprestimoRepository = require('../repositories/emprestimo.repository');
+const equipamentoRepository = require('../repositories/equipamento.repository');
 
 const registrar = async (emprestimoId, itemId, dados, usuarioId) => {
     const item = await emprestimoRepository.buscarItemPorId(itemId);
@@ -24,4 +25,20 @@ const registrar = async (emprestimoId, itemId, dados, usuarioId) => {
 
 const listar = (filtros) => devolucaoRepository.listar(filtros);
 
-module.exports = { registrar, listar };
+const buscarItemPorPatrimonio = async (numeroPatrimonio) => {
+    const equipamento = await equipamentoRepository.buscarPorPatrimonio(numeroPatrimonio);
+    if (!equipamento) {
+        throw new AppError('Equipamento não encontrado para esse patrimônio', 404);
+    }
+    if (equipamento.status !== 'EMPRESTADO') {
+        throw new AppError(`Equipamento não está emprestado no momento (status: ${equipamento.status})`, 409);
+    }
+
+    const item = await emprestimoRepository.buscarItemAtivoPorEquipamentoId(equipamento.id);
+    if (!item) {
+        throw new AppError('Não foi encontrado um empréstimo ativo para esse equipamento', 404);
+    }
+    return item;
+};
+
+module.exports = { registrar, listar, buscarItemPorPatrimonio };

@@ -29,4 +29,8 @@ const listarDevolucoesSchema = z.object({
     }),
 });
 
-module.exports = { registrarDevolucaoSchema, listarDevolucoesSchema };
+const buscarItemPorPatrimonioSchema = z.object({
+    params: z.object({ numeroPatrimonio: z.string().min(1, 'Número de patrimônio é obrigatório') }),
+});
+
+module.exports = { registrarDevolucaoSchema, listarDevolucoesSchema, buscarItemPorPatrimonioSchema };

@@ -17,4 +17,8 @@ export const emprestimoService = {
         const { data } = await api.put(`/emprestimos/${id}`, payload)
         return data.data
     },
+    adicionarItens: async (id, equipamentoIds) => {
+        const { data } = await api.post(`/emprestimos/${id}/itens`, { equipamentoIds })
+        return data.data
+    },
 }

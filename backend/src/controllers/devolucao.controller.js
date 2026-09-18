@@ -19,4 +19,13 @@ const listar = async (req, res, next) => {
     }
 };
 
-module.exports = { registrar, listar };
+const buscarPorPatrimonio = async (req, res, next) => {
+    try {
+        const item = await devolucaoService.buscarItemPorPatrimonio(req.params.numeroPatrimonio);
+        res.json({ success: true, data: item });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { registrar, listar, buscarPorPatrimonio };

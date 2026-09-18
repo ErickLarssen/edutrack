@@ -36,4 +36,13 @@ const atualizar = async (req, res, next) => {
     }
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar };
+const adicionarItens = async (req, res, next) => {
+    try {
+        const emprestimo = await emprestimoService.adicionarItens(req.params.id, req.body.equipamentoIds);
+        res.json({ success: true, data: emprestimo });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, adicionarItens };

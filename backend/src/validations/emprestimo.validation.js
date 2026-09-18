@@ -40,4 +40,11 @@ const listarEmprestimosSchema = z.object({
     }),
 });
 
-module.exports = { criarEmprestimoSchema, atualizarEmprestimoSchema, idParamSchema, listarEmprestimosSchema };
+const adicionarItensSchema = z.object({
+    params: z.object({ id: z.coerce.number().int().positive('ID inválido') }),
+    body: z.object({
+        equipamentoIds: z.array(z.coerce.number().int().positive()).min(1, 'Selecione pelo menos um equipamento'),
+    }),
+});
+
+module.exports = { criarEmprestimoSchema, atualizarEmprestimoSchema, idParamSchema, listarEmprestimosSchema, adicionarItensSchema };

@@ -17,5 +17,14 @@ export function useEmprestimoMutations() {
         },
     })
 
-    return { criar, atualizar }
+    const adicionarItens = useMutation({
+        mutationFn: ({ id, equipamentoIds }) => emprestimoService.adicionarItens(id, equipamentoIds),
+        onSuccess: (_, variables) => {
+            invalidar()
+            queryClient.invalidateQueries({ queryKey: ['emprestimo', variables.id] })
+            queryClient.invalidateQueries({ queryKey: ['equipamentos'] })
+        },
+    })
+
+    return { criar, atualizar, adicionarItens }
 }

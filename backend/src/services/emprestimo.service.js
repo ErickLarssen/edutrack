@@ -49,4 +49,35 @@ const atualizar = async (id, dados) => {
     return emprestimoRepository.atualizar(id, dados);
 };
 
-module.exports = { criar, listar, buscarPorId, atualizar };
+const adicionarItens = async (emprestimoId, equipamentoIds) => {
+    const idsUnicos = [...new Set(equipamentoIds)];
+    if (idsUnicos.length !== equipamentoIds.length) {
+        throw new AppError('A lista contém equipamentos duplicados', 422);
+    }
+
+    const emprestimo = await buscarPorId(emprestimoId);
+    if (emprestimo.status !== 'ATIVO') {
+        throw new AppError('Não é possível adicionar equipamentos a um empréstimo já finalizado', 409);
+    }
+
+    const idsJaNoEmprestimo = emprestimo.itens.map((item) => item.equipamentoId);
+    const jaIncluidos = idsUnicos.filter((id) => idsJaNoEmprestimo.includes(id));
+    if (jaIncluidos.length > 0) {
+        throw new AppError('Um ou mais equipamentos já fazem parte deste empréstimo', 409);
+    }
+
+    const equipamentos = await equipamentoRepository.buscarPorIds(idsUnicos);
+    if (equipamentos.length !== idsUnicos.length) {
+        throw new AppError('Um ou mais equipamentos informados não existem', 404);
+    }
+
+    const indisponiveis = equipamentos.filter((eq) => eq.status !== 'DISPONIVEL');
+    if (indisponiveis.length > 0) {
+        const lista = indisponiveis.map((eq) => `${eq.numeroPatrimonio} (${eq.status})`).join(', ');
+        throw new AppError(`Equipamento(s) indisponível(is): ${lista}`, 409);
+    }
+
+    return emprestimoRepository.adicionarItens(emprestimoId, idsUnicos);
+};
+
+module.exports = { criar, listar, buscarPorId, atualizar, adicionarItens };
