@@ -14,7 +14,7 @@ import { hojeLocal } from '../utils/hojeLocal'
 
 export function EmprestimoScannerPage() {
     const navigate = useNavigate()
-    const { data: professoresData } = useProfessores()
+    const { data: professoresData } = useProfessores({ limite: 200 })
     const { criar } = useEmprestimoMutations()
 
     const [etapa, setEtapa] = useState('cabecalho')

@@ -24,7 +24,7 @@ function horaDePrevisao(previsaoDevolucao) {
 }
 
 function EmprestimoFormCampos({ modoEdicao, emprestimo, onSubmit, enviando }) {
-    const { data: professoresData } = useProfessores()
+    const { data: professoresData } = useProfessores({ limite: 200 })
 
     const {
         register,
