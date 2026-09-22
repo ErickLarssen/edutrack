@@ -31,7 +31,7 @@ const listarProfessoresSchema = z.object({
         busca: z.string().optional(),
         incluirInativos: booleanoDeQuery.optional(),
         pagina: z.coerce.number().int().positive().optional(),
-        limite: z.coerce.number().int().positive().max(100).optional(),
+        limite: z.coerce.number().int().positive().max(500).optional(),
     }),
 });
 
