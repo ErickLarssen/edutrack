@@ -76,14 +76,14 @@ export function LoginPage() {
                 </p>
             </div>
 
-            <div className="flex items-center justify-center bg-slate-50 p-6">
+            <div className="flex items-center justify-center bg-slate-50 p-6 tema-claro-forcado">
                 <Card className="w-full max-w-sm">
                     <CardHeader>
                         <div className="mb-1 flex items-center lg:hidden">
                             <img src="/logo-proadesk.png" alt="Proadesk" className="h-8 w-auto" />
                         </div>
                         <h1 className="text-lg font-semibold text-slate-900">Bem-vindo de volta</h1>
-                        <p className="text-sm text-slate-500">Entre com sua conta para continuar</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">Entre com sua conta para continuar</p>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

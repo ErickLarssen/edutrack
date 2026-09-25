@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *):not(:where(.tema-claro-forcado, .tema-claro-forcado *)));
+
 @theme {
     /* Cor de marca — usada em botões primários, links, elementos de destaque */
     --color-brand-50: #eef2ff;
@@ -16,5 +18,5 @@
 }
 
 body {
-    @apply bg-slate-50 text-slate-900 antialiased font-sans;
+    @apply bg-slate-50 text-slate-900 antialiased font-sans dark:bg-slate-950 dark:text-slate-100;
 }

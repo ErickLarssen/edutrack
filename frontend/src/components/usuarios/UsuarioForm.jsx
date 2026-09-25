@@ -45,7 +45,7 @@ export function UsuarioForm({ usuario, onSubmit, enviando }) {
                     ))}
                 </select>
                 {editandoProprioAdmin && (
-                    <span className="text-xs text-slate-500">Você não pode alterar seu próprio papel de administrador.</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">Você não pode alterar seu próprio papel de administrador.</span>
                 )}
                 {errors.role && <span className="text-sm text-red-600">{errors.role.message}</span>}
             </div>

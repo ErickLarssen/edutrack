@@ -8,7 +8,7 @@ export function AppLayout() {
     const [sidebarAberta, setSidebarAberta] = useState(false)
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
             <Sidebar aberta={sidebarAberta} onFechar={() => setSidebarAberta(false)} />
 
             <div className="md:pl-64 print:pl-0">

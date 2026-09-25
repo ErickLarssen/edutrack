@@ -36,10 +36,10 @@ export function Modal({ aberto, onFechar, title, children }) {
     return createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div className="fixed inset-0 bg-slate-900/50" onClick={onFechar} />
-            <div ref={conteudoRef} className="relative z-10 w-full max-w-lg rounded-card bg-white shadow-xl">
-                <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
-                    <h2 className="text-base font-semibold text-slate-900">{title}</h2>
-                    <button onClick={onFechar} className="text-slate-400 hover:text-slate-600">
+            <div className="relative z-10 w-full max-w-lg rounded-card bg-white shadow-xl dark:bg-slate-900">
+                <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-800">
+                    <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{title}</h2>
+                    <button onClick={onFechar} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
                         <X className="h-5 w-5" />
                     </button>
                 </div>

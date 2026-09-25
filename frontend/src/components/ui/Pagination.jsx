@@ -6,7 +6,7 @@ export function Pagination({ pagina, limite, total, onChange }) {
     if (totalPaginas <= 1) return null
 
     return (
-        <div className="flex items-center justify-between border-t border-slate-200 pt-4 text-sm text-slate-600">
+        <div className="flex items-center justify-between border-t border-slate-200 pt-4 text-sm text-slate-600 dark:border-slate-800 dark:text-slate-400">
             <span>
                 Página {pagina} de {totalPaginas} — {total} registro{total === 1 ? '' : 's'}
             </span>

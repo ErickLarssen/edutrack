@@ -25,8 +25,8 @@ export function DevolucoesPage() {
     return (
         <div className="flex flex-col gap-6">
             <div>
-                <h1 className="text-2xl font-semibold text-slate-900">Devoluções</h1>
-                <p className="text-sm text-slate-500">Histórico de devoluções registradas</p>
+                <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Devoluções</h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Histórico de devoluções registradas</p>
             </div>
 
             <Button variant="secondary" className="w-fit" onClick={() => navigate('/devolucoes/scanner')}>

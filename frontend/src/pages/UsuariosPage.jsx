@@ -73,8 +73,8 @@ export function UsuariosPage() {
         <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-semibold text-slate-900">Usuários</h1>
-                    <p className="text-sm text-slate-500">Contas de acesso ao sistema</p>
+                    <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Usuários</h1>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Contas de acesso ao sistema</p>
                 </div>
                 <Button onClick={abrirCriacao}>
                     <Plus className="h-4 w-4" /> Novo usuário

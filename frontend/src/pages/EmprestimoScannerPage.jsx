@@ -118,8 +118,8 @@ export function EmprestimoScannerPage() {
         return (
             <div className="flex flex-col gap-6">
                 <div>
-                    <h1 className="text-2xl font-semibold text-slate-900">Registrar empréstimo com QR Code</h1>
-                    <p className="text-sm text-slate-500">Preencha os dados da retirada antes de escanear os equipamentos</p>
+                    <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Registrar empréstimo com QR Code</h1>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Preencha os dados da retirada antes de escanear os equipamentos</p>
                 </div>
 
                 <Card className="max-w-md">
@@ -187,7 +187,7 @@ export function EmprestimoScannerPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-semibold text-slate-900">Escaneando equipamentos</h1>
-                    <p className="text-sm text-slate-500">Aponte a câmera para o QR Code de cada equipamento</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Aponte a câmera para o QR Code de cada equipamento</p>
                 </div>
                 <Button variant="secondary" onClick={() => setEtapa('cabecalho')}>Voltar</Button>
             </div>
@@ -231,7 +231,7 @@ export function EmprestimoScannerPage() {
                                 <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">
                                     <div>
                                         <p className="font-medium text-slate-900">{item.numeroPatrimonio}</p>
-                                        <p className="text-slate-500">{item.marca} {item.modelo}</p>
+                                        <p className="text-slate-500 dark:text-slate-400">{item.marca} {item.modelo}</p>
                                     </div>
                                     <button onClick={() => removerItem(item.id)} className="text-slate-400 hover:text-red-600">
                                         <X className="h-4 w-4" />

@@ -13,7 +13,7 @@ export function EmprestimoForm({ emprestimoId, onSubmit, enviando }) {
     const { data: emprestimo, isLoading: carregando } = useEmprestimo(emprestimoId)
 
     if (modoEdicao && carregando) {
-        return <p className="text-sm text-slate-500">Carregando dados do empréstimo...</p>
+        return <p className="text-sm text-slate-500 dark:text-slate-400">Carregando dados do empréstimo...</p>
     }
 
     return <EmprestimoFormCampos modoEdicao={modoEdicao} emprestimo={emprestimo} onSubmit={onSubmit} enviando={enviando} />

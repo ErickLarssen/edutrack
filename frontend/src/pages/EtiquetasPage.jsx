@@ -52,8 +52,8 @@ export function EtiquetasPage() {
         <div className="flex flex-col gap-6">
             <div className="flex flex-wrap items-center justify-between gap-4 print:hidden">
                 <div>
-                    <h1 className="text-2xl font-semibold text-slate-900">Gerar Etiquetas</h1>
-                    <p className="text-sm text-slate-500">QR Code + número de patrimônio, prontos para imprimir</p>
+                    <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Gerar Etiquetas</h1>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">QR Code + número de patrimônio, prontos para imprimir</p>
                 </div>
                 <div className="flex gap-2">
                     <Button variant="secondary" onClick={marcarTodosExibidos} disabled={atualizar.isPending}>
@@ -79,10 +79,10 @@ export function EtiquetasPage() {
             </div>
 
             {erro && <p className="text-sm text-red-600 print:hidden">{erro}</p>}
-            {isLoading && <p className="text-sm text-slate-500 print:hidden">Carregando...</p>}
+            {isLoading && <p className="text-sm text-slate-500 dark:text-slate-400 print:hidden">Carregando...</p>}
             {isError && <p className="text-sm text-red-600 print:hidden">Não foi possível carregar os equipamentos.</p>}
             {data && data.dados.length === 0 && (
-                <p className="text-sm text-slate-500 print:hidden">Nenhum equipamento encontrado.</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 print:hidden">Nenhum equipamento encontrado.</p>
             )}
 
             {data && data.dados.length > 0 && (

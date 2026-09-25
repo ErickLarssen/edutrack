@@ -21,7 +21,7 @@ export function DevolucaoForm({ item, onSubmit, enviando }) {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="rounded-lg bg-slate-50 p-3 text-sm">
                 <p className="font-medium text-slate-900">{item.equipamento.numeroPatrimonio}</p>
-                <p className="text-slate-500">{item.equipamento.marca} {item.equipamento.modelo}</p>
+                <p className="text-slate-500 dark:text-slate-400">{item.equipamento.marca} {item.equipamento.modelo}</p>
             </div>
 
             <div className="flex flex-col gap-1.5">

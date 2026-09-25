@@ -76,8 +76,8 @@ export function EquipamentosPage() {
         <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-semibold text-slate-900">Equipamentos</h1>
-                    <p className="text-sm text-slate-500">Tablets, notebooks e Chromebooks do inventário</p>
+                    <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Equipamentos</h1>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Tablets, notebooks e Chromebooks do inventário</p>
                 </div>
                 <Button onClick={abrirCriacao}>
                     <Plus className="h-4 w-4" /> Novo equipamento

@@ -29,9 +29,9 @@ export function EquipamentoMultiSelect({ control, error }) {
                         <label className="text-sm font-medium text-slate-700">Equipamentos disponíveis</label>
                         <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio..." />
                         <div className="max-h-56 overflow-y-auto rounded-lg border border-slate-300">
-                            {isLoading && <p className="p-3 text-sm text-slate-500">Carregando...</p>}
+                            {isLoading && <p className="p-3 text-sm text-slate-500 dark:text-slate-400">Carregando...</p>}
                             {data?.dados.length === 0 && (
-                                <p className="p-3 text-sm text-slate-500">Nenhum equipamento disponível no momento.</p>
+                                <p className="p-3 text-sm text-slate-500 dark:text-slate-400">Nenhum equipamento disponível no momento.</p>
                             )}
                             {data?.dados.map((equipamento) => (
                                 <label
@@ -45,7 +45,7 @@ export function EquipamentoMultiSelect({ control, error }) {
                                         className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
                                     />
                                     <span className="font-medium text-slate-900">{equipamento.numeroPatrimonio}</span>
-                                    <span className="text-slate-500">{equipamento.marca} {equipamento.modelo}</span>
+                                    <span className="text-slate-500 dark:text-slate-400">{equipamento.marca} {equipamento.modelo}</span>
                                 </label>
                             ))}
                         </div>

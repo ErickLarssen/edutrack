@@ -80,8 +80,8 @@ export function DevolucaoScannerPage() {
     return (
         <div className="flex flex-col gap-6">
             <div>
-                <h1 className="text-2xl font-semibold text-slate-900">Devolver com QR Code</h1>
-                <p className="text-sm text-slate-500">Aponte a câmera para o equipamento sendo devolvido</p>
+                <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Devolver com QR Code</h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Aponte a câmera para o equipamento sendo devolvido</p>
             </div>
 
             <div className="grid gap-6 lg:grid-cols-2">
@@ -103,7 +103,7 @@ export function DevolucaoScannerPage() {
                             <p className="text-xs font-medium uppercase tracking-wide text-brand-600">Equipamento encontrado</p>
                             <p className="mt-1 text-lg font-semibold text-slate-900">{itemAtual.equipamento.numeroPatrimonio}</p>
                             <p className="text-sm text-slate-600">{itemAtual.equipamento.marca} {itemAtual.equipamento.modelo}</p>
-                            <p className="mt-2 text-sm text-slate-500">
+                            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
                                 Prof. {itemAtual.emprestimo.professor.nome}
                                 {itemAtual.emprestimo.turma && ` — Turma ${itemAtual.emprestimo.turma}`}
                             </p>
@@ -147,7 +147,7 @@ export function DevolucaoScannerPage() {
                             <h2 className="text-sm font-semibold text-slate-900">Devolvidos nesta sessão ({historico.length})</h2>
                         </CardHeader>
                         <CardContent className="flex max-h-72 flex-col gap-2 overflow-y-auto">
-                            {historico.length === 0 && <p className="text-sm text-slate-500">Nenhuma devolução registrada ainda.</p>}
+                            {historico.length === 0 && <p className="text-sm text-slate-500 dark:text-slate-400">Nenhuma devolução registrada ainda.</p>}
                             {historico.map((registro, indice) => (
                                 <div key={`${registro.id}-${indice}`} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">
                                     <span className="font-medium text-slate-900">{registro.patrimonio}</span>
