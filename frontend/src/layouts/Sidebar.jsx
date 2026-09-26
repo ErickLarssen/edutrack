@@ -36,7 +36,7 @@ export function Sidebar({ aberta, onFechar }) {
 
             <aside
                 className={cn(
-                    'fixed inset-y-0 left-0 z-40 w-64 -translate-x-full overflow-hidden border-r border-slate-800 bg-gradient-to-b from-slate-900 via-slate-900 to-indigo-950 transition-transform duration-200 md:translate-x-0 print:hidden',
+                    'fixed inset-y-0 left-0 z-40 w-64 -translate-x-full overflow-hidden border-r border-slate-800 bg-linear-to-b from-slate-900 via-slate-900 to-indigo-950 transition-transform duration-200 md:translate-x-0 print:hidden',
                     aberta && 'translate-x-0'
                 )}
             >
@@ -53,7 +53,7 @@ export function Sidebar({ aberta, onFechar }) {
                 </div>
 
                 <div className="relative flex h-16 items-center justify-between border-b border-white/10 px-6">
-                    <img src="/logo-proadesk.png" alt="Proadesk" className="h-9 w-auto" />
+                    <img src="/logo-proadesk.png" alt="Proadesk" className="h-25 w-auto" />
                     <button onClick={onFechar} className="text-slate-400 md:hidden">
                         <X className="h-5 w-5" />
                     </button>
@@ -69,9 +69,9 @@ export function Sidebar({ aberta, onFechar }) {
                             className={({ isActive }) =>
                                 cn(
                                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all',
-                                    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400',
+                                    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400',
                                     isActive
-                                        ? 'bg-gradient-to-r from-brand-500 to-indigo-600 text-white shadow-lg shadow-brand-900/40'
+                                        ? 'bg-linear-to-r from-brand-500 to-indigo-600 text-white shadow-lg shadow-brand-900/40'
                                         : 'text-slate-300 hover:bg-white/5 hover:text-white'
                                 )
                             }

@@ -1,7 +1,7 @@
 import { cn } from '../../utils/cn'
 
 const VARIANTS = {
-    primary: 'bg-brand-600 text-white hover:bg-brand-700 focus-visible:outline-brand-600',
+    primary: 'rounded-full bg-brand-600 text-white shadow-sm transition-all duration-300 hover:bg-brand-700 hover:shadow-md active:scale-[0.97] focus-visible:outline-brand-600',
     secondary: 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus-visible:outline-slate-400 dark:bg-slate-900 dark:text-slate-200 dark:border-slate-700 dark:hover:bg-slate-800',
     ghost: 'bg-transparent text-slate-600 hover:bg-slate-100 focus-visible:outline-slate-400 dark:text-slate-300 dark:hover:bg-slate-800',
     danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-600',

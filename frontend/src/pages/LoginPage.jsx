@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Laptop, ArrowRightLeft, BarChart3 } from 'lucide-react'
 import { Card, CardHeader, CardContent } from '../components/ui/Card'
 import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/Button'
+import { FlowButton } from '../components/ui/FlowButton'
+import { SmokeyBackground } from '../components/ui/SmokeyBackground'
 import { useAuth } from '../contexts/AuthContext'
 
 const DESTAQUES = [
@@ -37,13 +38,9 @@ export function LoginPage() {
     return (
         <div className="grid min-h-screen lg:grid-cols-2">
             <div className="relative hidden flex-col justify-between overflow-hidden bg-slate-900 p-10 text-white lg:flex">
-                <div
-                    className="pointer-events-none absolute inset-0 opacity-20"
-                    style={{
-                        backgroundImage:
-                            'radial-gradient(circle at 20% 20%, rgba(6,189,188,0.45), transparent 40%), radial-gradient(circle at 80% 70%, rgba(0,152,112,0.4), transparent 45%)',
-                    }}
-                />
+                <SmokeyBackground className="opacity-30" color="#009870" backdropBlurAmount="lg" />
+                <div className="pointer-events-none absolute inset-0 bg-slate-900/50" />
+
                 <div className="relative flex items-center">
                     <img src="/logo-proadesk.png" alt="Proadesk" className="h-60 w-auto" />
                 </div>
@@ -54,7 +51,7 @@ export function LoginPage() {
                             Gestão de equipamentos escolares, sem planilha e sem papel.
                         </h1>
                         <p className="mt-3 text-sm text-slate-300">
-                            Desenvolvido para o dia a dia do PROATI. Controle de tablets, notebooks e Chromebooks,
+                            Desenvolvido para o dia a dia do PROATI - controle de tablets, notebooks e Chromebooks,
                             da retirada à devolução.
                         </p>
                     </div>
@@ -72,18 +69,21 @@ export function LoginPage() {
                 </div>
 
                 <p className="relative text-xs text-slate-400">
-                    Sistema desenvolvido por <a href="https://ericksilva.dev/">Erick Silva</a>.
+                    Sistema desenvolvido para a rede estadual de ensino de São Paulo.
                 </p>
             </div>
 
-            <div className="flex items-center justify-center bg-slate-50 p-6 tema-claro-forcado">
-                <Card className="w-full max-w-sm">
-                    <CardHeader>
+            <div className="relative flex items-center justify-center overflow-hidden bg-slate-50 p-6 tema-claro-forcado">
+                <div className="pointer-events-none absolute left-[10%] top-[15%] h-72 w-72 rounded-full bg-linear-to-br from-brand-400/25 to-transparent blur-3xl" />
+                <div className="pointer-events-none absolute bottom-[15%] right-[10%] h-72 w-72 rounded-full bg-linear-to-br from-emerald-400/25 to-transparent blur-3xl" />
+
+                <Card className="relative w-full max-w-sm border-white/60 bg-white/70 shadow-2xl backdrop-blur-xl">
+                    <CardHeader className="border-white/40">
                         <div className="mb-1 flex items-center lg:hidden">
-                            <img src="/logo-proadesk.png" alt="Proadesk" className="h-8 w-auto" />
+                            <img src="/logo-proadesk.png" alt="Proadesk" className="h-10 w-auto" />
                         </div>
                         <h1 className="text-lg font-semibold text-slate-900">Bem-vindo de volta</h1>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">Entre com sua conta para continuar</p>
+                        <p className="text-sm text-slate-500">Entre com sua conta para continuar</p>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -106,9 +106,12 @@ export function LoginPage() {
                                 required
                             />
                             {erro && <p className="text-sm text-red-600">{erro}</p>}
-                            <Button type="submit" disabled={enviando} className="mt-2">
-                                {enviando ? 'Entrando...' : 'Entrar'}
-                            </Button>
+                            <FlowButton
+                                type="submit"
+                                disabled={enviando}
+                                text={enviando ? 'Entrando...' : 'Entrar'}
+                                className="mt-2"
+                            />
                         </form>
                     </CardContent>
                 </Card>
