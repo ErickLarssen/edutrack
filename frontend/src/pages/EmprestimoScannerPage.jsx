@@ -225,7 +225,7 @@ export function EmprestimoScannerPage() {
                         </CardHeader>
                         <CardContent className="flex max-h-72 flex-col gap-2 overflow-y-auto">
                             {itensCarrinho.length === 0 && (
-                                <p className="text-sm text-slate-500">Nenhum equipamento escaneado ainda.</p>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">Nenhum equipamento escaneado ainda.</p>
                             )}
                             {itensCarrinho.map((item) => (
                                 <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">

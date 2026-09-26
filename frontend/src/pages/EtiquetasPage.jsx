@@ -95,7 +95,7 @@ export function EtiquetasPage() {
                             >
                                 <QRCodeSVG value={equipamento.numeroPatrimonio} size={96} />
                                 <span className="text-sm font-semibold text-slate-900">{equipamento.numeroPatrimonio}</span>
-                                <span className="text-xs text-slate-500 print:hidden">
+                                <span className="text-xs text-slate-500 dark:text-slate-400 print:hidden">
                                     {equipamento.qrCode ? 'Já impressa' : 'Pendente'}
                                 </span>
                                 {!equipamento.qrCode && (
