@@ -16,6 +16,18 @@ export function useTheme() {
         localStorage.setItem(CHAVE, tema)
     }, [tema])
 
+    // Impressão sempre em tema claro (senão texto claro sai invisível no papel)
+    useEffect(() => {
+        const aoImprimir = () => document.documentElement.classList.remove('dark')
+        const depoisDeImprimir = () => document.documentElement.classList.toggle('dark', tema === 'dark')
+        window.addEventListener('beforeprint', aoImprimir)
+        window.addEventListener('afterprint', depoisDeImprimir)
+        return () => {
+            window.removeEventListener('beforeprint', aoImprimir)
+            window.removeEventListener('afterprint', depoisDeImprimir)
+        }
+    }, [tema])
+
     const alternar = () => setTema((atual) => (atual === 'dark' ? 'light' : 'dark'))
 
     return { tema, alternar }

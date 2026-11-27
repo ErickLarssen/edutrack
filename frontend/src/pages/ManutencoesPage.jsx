@@ -66,9 +66,9 @@ export function ManutencoesPage() {
                 </Button>
             </div>
 
-            {erro && <p className="text-sm text-red-600">{erro}</p>}
+            {erro && <p className="text-sm text-red-600 dark:text-red-400">{erro}</p>}
             {isLoading && <Spinner />}
-            {isError && <p className="text-sm text-red-600">Não foi possível carregar as manutenções.</p>}
+            {isError && <p className="text-sm text-red-600 dark:text-red-400">Não foi possível carregar as manutenções.</p>}
 
             {data && (
                 <>

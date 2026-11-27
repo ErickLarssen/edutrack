@@ -34,16 +34,16 @@ export function EquipamentoForm({ equipamento, onSubmit, enviando }) {
                 <Input label="Modelo" error={errors.modelo?.message} {...register('modelo')} />
             </div>
             <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-slate-700">Tipo</label>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Tipo</label>
                 <select
-                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-slate-100 dark:bg-slate-800 dark:border-slate-700"
                     {...register('tipo')}
                 >
                     {Object.entries(TIPO_EQUIPAMENTO).map(([valor, label]) => (
                         <option key={valor} value={valor}>{label}</option>
                     ))}
                 </select>
-                {errors.tipo && <span className="text-sm text-red-600">{errors.tipo.message}</span>}
+                {errors.tipo && <span className="text-sm text-red-600 dark:text-red-400">{errors.tipo.message}</span>}
             </div>
             <Input label="Localização" error={errors.localizacao?.message} {...register('localizacao')} />
             <Input label="Observações" error={errors.observacoes?.message} {...register('observacoes')} />

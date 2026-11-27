@@ -67,20 +67,20 @@ export function EtiquetasPage() {
 
             <div className="flex flex-wrap items-center gap-4 print:hidden">
                 <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio..." />
-                <label className="flex items-center gap-2 text-sm text-slate-600">
+                <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                     <input
                         type="checkbox"
                         checked={apenasPendentes}
                         onChange={(e) => setApenasPendentes(e.target.checked)}
-                        className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+                        className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 dark:border-slate-600"
                     />
                     Mostrar apenas pendentes (sem etiqueta gerada)
                 </label>
             </div>
 
-            {erro && <p className="text-sm text-red-600 print:hidden">{erro}</p>}
+            {erro && <p className="text-sm text-red-600 print:hidden dark:text-red-400">{erro}</p>}
             {isLoading && <p className="text-sm text-slate-500 dark:text-slate-400 print:hidden">Carregando...</p>}
-            {isError && <p className="text-sm text-red-600 print:hidden">Não foi possível carregar os equipamentos.</p>}
+            {isError && <p className="text-sm text-red-600 print:hidden dark:text-red-400">Não foi possível carregar os equipamentos.</p>}
             {data && data.dados.length === 0 && (
                 <p className="text-sm text-slate-500 dark:text-slate-400 print:hidden">Nenhum equipamento encontrado.</p>
             )}
@@ -91,17 +91,17 @@ export function EtiquetasPage() {
                         {data.dados.map((equipamento) => (
                             <div
                                 key={equipamento.id}
-                                className="flex flex-col items-center gap-2 rounded-lg border border-dashed border-slate-300 p-4 print:break-inside-avoid"
+                                className="flex flex-col items-center gap-2 rounded-lg border border-dashed border-slate-300 p-4 print:break-inside-avoid dark:border-slate-700"
                             >
                                 <QRCodeSVG value={equipamento.numeroPatrimonio} size={96} />
-                                <span className="text-sm font-semibold text-slate-900">{equipamento.numeroPatrimonio}</span>
+                                <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">{equipamento.numeroPatrimonio}</span>
                                 <span className="text-xs text-slate-500 dark:text-slate-400 print:hidden">
                                     {equipamento.qrCode ? 'Já impressa' : 'Pendente'}
                                 </span>
                                 {!equipamento.qrCode && (
                                     <button
                                         onClick={() => marcarComoImpresso(equipamento)}
-                                        className="text-xs text-brand-600 hover:underline print:hidden"
+                                        className="text-xs text-brand-600 hover:underline print:hidden dark:text-brand-400"
                                     >
                                         Marcar como impressa
                                     </button>

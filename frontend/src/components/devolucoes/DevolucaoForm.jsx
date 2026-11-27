@@ -19,19 +19,19 @@ export function DevolucaoForm({ item, onSubmit, enviando }) {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-            <div className="rounded-lg bg-slate-50 p-3 text-sm">
-                <p className="font-medium text-slate-900">{item.equipamento.numeroPatrimonio}</p>
+            <div className="rounded-lg bg-slate-50 p-3 text-sm dark:bg-slate-800/60">
+                <p className="font-medium text-slate-900 dark:text-slate-100">{item.equipamento.numeroPatrimonio}</p>
                 <p className="text-slate-500 dark:text-slate-400">{item.equipamento.marca} {item.equipamento.modelo}</p>
             </div>
 
             <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-slate-700">Conferência</label>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Conferência</label>
                 <div className="flex gap-4">
-                    <label className="flex items-center gap-2 text-sm text-slate-700">
+                    <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
                         <input type="radio" value="OK" {...register('conferencia')} className="h-4 w-4 text-brand-600" />
                         Sem problemas
                     </label>
-                    <label className="flex items-center gap-2 text-sm text-slate-700">
+                    <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
                         <input type="radio" value="COM_PROBLEMA" {...register('conferencia')} className="h-4 w-4 text-brand-600" />
                         Com problema
                     </label>

@@ -15,20 +15,20 @@ export function AdicionarEquipamentoPanel({ onConfirmar, onCancelar, enviando })
     }
 
     return (
-        <div className="flex flex-col gap-3 rounded-lg border border-slate-200 p-4">
+        <div className="flex flex-col gap-3 rounded-lg border border-slate-200 p-4 dark:border-slate-700">
             <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio..." />
-            <div className="max-h-48 overflow-y-auto rounded-lg border border-slate-200">
+            <div className="max-h-48 overflow-y-auto rounded-lg border border-slate-200 dark:border-slate-700">
                 {isLoading && <p className="p-3 text-sm text-slate-500 dark:text-slate-400">Carregando...</p>}
                 {data?.dados.length === 0 && <p className="p-3 text-sm text-slate-500 dark:text-slate-400">Nenhum equipamento disponível.</p>}
                 {data?.dados.map((equipamento) => (
-                    <label key={equipamento.id} className="flex cursor-pointer items-center gap-3 border-b border-slate-100 px-3 py-2 text-sm last:border-b-0 hover:bg-slate-50">
+                    <label key={equipamento.id} className="flex cursor-pointer items-center gap-3 border-b border-slate-100 px-3 py-2 text-sm last:border-b-0 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:border-slate-800">
                         <input
                             type="checkbox"
                             checked={selecionados.includes(equipamento.id)}
                             onChange={() => alternar(equipamento.id)}
-                            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+                            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 dark:border-slate-600"
                         />
-                        <span className="font-medium text-slate-900">{equipamento.numeroPatrimonio}</span>
+                        <span className="font-medium text-slate-900 dark:text-slate-100">{equipamento.numeroPatrimonio}</span>
                         <span className="text-slate-500 dark:text-slate-400">{equipamento.marca} {equipamento.modelo}</span>
                     </label>
                 ))}

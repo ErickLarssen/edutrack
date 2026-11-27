@@ -15,14 +15,14 @@ export const Input = forwardRef(function Input({ className, label, error, id, ..
                 className={cn(
                     'h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900',
                     'dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100',
-                    'placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-400',
+                    'placeholder:text-slate-400 dark:placeholder:text-slate-500',
                     'focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500',
                     error && 'border-red-500 focus:ring-red-500 focus:border-red-500',
                     className
                 )}
                 {...props}
             />
-            {error && <span className="text-sm text-red-600">{error}</span>}
+            {error && <span className="text-sm text-red-600 dark:text-red-400">{error}</span>}
         </div>
     )
 })

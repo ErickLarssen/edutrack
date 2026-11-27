@@ -32,14 +32,14 @@ export function ManutencaoForm({ manutencao, onSubmit, enviando }) {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             {modoEdicao ? (
-                <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
-                    <span className="font-medium text-slate-900">Equipamento:</span> {manutencao.equipamento.numeroPatrimonio}
+                <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-600 dark:text-slate-400 dark:bg-slate-800/60">
+                    <span className="font-medium text-slate-900 dark:text-slate-100">Equipamento:</span> {manutencao.equipamento.numeroPatrimonio}
                 </div>
             ) : (
                 <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-medium text-slate-700">Equipamento</label>
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Equipamento</label>
                     <select
-                        className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-slate-100 dark:bg-slate-800 dark:border-slate-700"
                         {...register('equipamentoId')}
                     >
                         <option value="">Selecione um equipamento disponível</option>
@@ -49,7 +49,7 @@ export function ManutencaoForm({ manutencao, onSubmit, enviando }) {
                             </option>
                         ))}
                     </select>
-                    {errors.equipamentoId && <span className="text-sm text-red-600">{errors.equipamentoId.message}</span>}
+                    {errors.equipamentoId && <span className="text-sm text-red-600 dark:text-red-400">{errors.equipamentoId.message}</span>}
                 </div>
             )}
 
@@ -57,9 +57,9 @@ export function ManutencaoForm({ manutencao, onSubmit, enviando }) {
             <Input label="Descrição" error={errors.descricao?.message} {...register('descricao')} />
 
             <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-slate-700">Prioridade</label>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Prioridade</label>
                 <select
-                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-slate-100 dark:bg-slate-800 dark:border-slate-700"
                     {...register('prioridade')}
                 >
                     <option value="BAIXA">Baixa</option>

@@ -15,7 +15,7 @@ export function DashboardPage() {
     const statsRef = useRevealOnData(data)
 
     if (isLoading) return <Spinner />
-    if (isError) return <p className="text-sm text-red-600">Não foi possível carregar o dashboard.</p>
+    if (isError) return <p className="text-sm text-red-600 dark:text-red-400">Não foi possível carregar o dashboard.</p>
 
     const { equipamentos, ultimosEmprestimos, ultimasDevolucoes, alertas } = data
 
