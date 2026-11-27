@@ -86,9 +86,9 @@ export function EquipamentosPage() {
 
             <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio, série, marca..." />
 
-            {erro && <p className="text-sm text-red-600">{erro}</p>}
+            {erro && <p className="text-sm text-red-600 dark:text-red-400">{erro}</p>}
             {isLoading && <Spinner />}
-            {isError && <p className="text-sm text-red-600">Não foi possível carregar os equipamentos.</p>}
+            {isError && <p className="text-sm text-red-600 dark:text-red-400">Não foi possível carregar os equipamentos.</p>}
 
             {data && (
                 <>

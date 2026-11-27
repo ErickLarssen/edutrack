@@ -100,9 +100,9 @@ export function DevolucaoScannerPage() {
                 <div className="flex flex-col gap-4">
                     {itemAtual ? (
                         <Card className="border-brand-200 bg-brand-50 p-5">
-                            <p className="text-xs font-medium uppercase tracking-wide text-brand-600">Equipamento encontrado</p>
-                            <p className="mt-1 text-lg font-semibold text-slate-900">{itemAtual.equipamento.numeroPatrimonio}</p>
-                            <p className="text-sm text-slate-600">{itemAtual.equipamento.marca} {itemAtual.equipamento.modelo}</p>
+                            <p className="text-xs font-medium uppercase tracking-wide text-brand-600 dark:text-brand-400">Equipamento encontrado</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">{itemAtual.equipamento.numeroPatrimonio}</p>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">{itemAtual.equipamento.marca} {itemAtual.equipamento.modelo}</p>
                             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
                                 Prof. {itemAtual.emprestimo.professor.nome}
                                 {itemAtual.emprestimo.turma && ` — Turma ${itemAtual.emprestimo.turma}`}
@@ -140,17 +140,17 @@ export function DevolucaoScannerPage() {
                         </form>
                     )}
 
-                    {erro && <p className="text-sm text-red-600">{erro}</p>}
+                    {erro && <p className="text-sm text-red-600 dark:text-red-400">{erro}</p>}
 
                     <Card>
                         <CardHeader>
-                            <h2 className="text-sm font-semibold text-slate-900">Devolvidos nesta sessão ({historico.length})</h2>
+                            <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Devolvidos nesta sessão ({historico.length})</h2>
                         </CardHeader>
                         <CardContent className="flex max-h-72 flex-col gap-2 overflow-y-auto">
                             {historico.length === 0 && <p className="text-sm text-slate-500 dark:text-slate-400">Nenhuma devolução registrada ainda.</p>}
                             {historico.map((registro, indice) => (
-                                <div key={`${registro.id}-${indice}`} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">
-                                    <span className="font-medium text-slate-900">{registro.patrimonio}</span>
+                                <div key={`${registro.id}-${indice}`} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
+                                    <span className="font-medium text-slate-900 dark:text-slate-100">{registro.patrimonio}</span>
                                     <Badge variant={registro.resultado === 'OK' ? 'success' : 'danger'}>
                                         {registro.resultado === 'OK' ? 'OK' : 'Com problema'}
                                     </Badge>

@@ -6,6 +6,7 @@
     /* Cor de marca — usada em botões primários, links, elementos de destaque */
     --color-brand-50: #eef2ff;
     --color-brand-100: #e0e7ff;
+    --color-brand-400: #818cf8;
     --color-brand-500: #6366f1;
     --color-brand-600: #4f46e5;
     --color-brand-700: #4338ca;
@@ -19,4 +20,118 @@
 
 body {
     @apply bg-slate-50 text-slate-900 antialiased font-sans dark:bg-slate-950 dark:text-slate-100;
+}
+
+/* ------------------------------------------------------------------ */
+/* Glass — tokens                                                      */
+/* Vidro só no "casco" (rail, topbar, painel). Tabelas/forms/modais    */
+/* continuam quase opacos (Etapa 3).                                   */
+/* ------------------------------------------------------------------ */
+:root {
+    --vidro-pilula-bg: rgb(255 255 255 / 0.72);
+    --vidro-painel-bg: rgb(255 255 255 / 0.66);
+    --vidro-borda: rgb(255 255 255 / 0.7);
+    --vidro-brilho: inset 0 1px 0 rgb(255 255 255 / 0.8);
+    --vidro-sombra: 0 10px 40px -12px rgb(30 41 59 / 0.25);
+    --vidro-blur-pilula: 16px;
+    --vidro-blur-painel: 12px;
+    --fundo-base: #f8fafc;
+    --fundo-veu: rgb(248 250 252 / 0.35);
+}
+
+.dark {
+    --vidro-pilula-bg: rgb(15 23 42 / 0.66);
+    --vidro-painel-bg: rgb(15 23 42 / 0.6);
+    --vidro-borda: rgb(255 255 255 / 0.09);
+    --vidro-brilho: inset 0 1px 0 rgb(255 255 255 / 0.08);
+    --vidro-sombra: 0 10px 40px -12px rgb(0 0 0 / 0.6);
+    --fundo-base: #020617;
+    --fundo-veu: rgb(2 6 23 / 0.35);
+}
+
+/* Camada de fundo. Para usar foto própria (WebP < 200 KB, em /public):
+   defina --fundo-imagem: url('/fundo.webp'); em :root. */
+.fundo-app {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background-color: var(--fundo-base);
+    background-image:
+        var(--fundo-imagem, none),
+        radial-gradient(60rem 40rem at 8% 0%, rgb(99 102 241 / 0.35), transparent 60%),
+        radial-gradient(50rem 40rem at 95% 15%, rgb(56 189 248 / 0.3), transparent 60%),
+        radial-gradient(55rem 45rem at 70% 105%, rgb(167 139 250 / 0.3), transparent 60%);
+    background-size: cover;
+    background-position: center;
+}
+
+.dark .fundo-app {
+    background-image:
+        var(--fundo-imagem, none),
+        radial-gradient(60rem 40rem at 8% 0%, rgb(79 70 229 / 0.38), transparent 60%),
+        radial-gradient(50rem 40rem at 95% 15%, rgb(14 116 144 / 0.3), transparent 60%),
+        radial-gradient(55rem 45rem at 70% 105%, rgb(109 40 217 / 0.3), transparent 60%);
+}
+
+/* Véu garante contraste mesmo com foto de fundo */
+.fundo-app::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--fundo-veu);
+}
+
+.vidro-pilula,
+.vidro-painel {
+    border: 1px solid var(--vidro-borda);
+    box-shadow: var(--vidro-brilho), var(--vidro-sombra);
+}
+
+.vidro-pilula {
+    background: var(--vidro-pilula-bg);
+    -webkit-backdrop-filter: blur(var(--vidro-blur-pilula)) saturate(1.3);
+    backdrop-filter: blur(var(--vidro-blur-pilula)) saturate(1.3);
+}
+
+.vidro-painel {
+    background: var(--vidro-painel-bg);
+    -webkit-backdrop-filter: blur(var(--vidro-blur-painel)) saturate(1.2);
+    backdrop-filter: blur(var(--vidro-blur-painel)) saturate(1.2);
+}
+
+/* Sem suporte a blur: fundo sólido */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :root {
+        --vidro-pilula-bg: rgb(255 255 255 / 0.96);
+        --vidro-painel-bg: rgb(255 255 255 / 0.94);
+    }
+    .dark {
+        --vidro-pilula-bg: rgb(15 23 42 / 0.97);
+        --vidro-painel-bg: rgb(15 23 42 / 0.95);
+    }
+}
+
+/* Usuário pediu menos transparência */
+@media (prefers-reduced-transparency: reduce) {
+    :root {
+        --vidro-pilula-bg: rgb(255 255 255 / 0.97);
+        --vidro-painel-bg: rgb(255 255 255 / 0.95);
+    }
+    .dark {
+        --vidro-pilula-bg: rgb(15 23 42 / 0.98);
+        --vidro-painel-bg: rgb(15 23 42 / 0.96);
+    }
+    .vidro-pilula,
+    .vidro-painel {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+/* Usuário pediu menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .rail-flutuante,
+    .rail-flutuante * {
+        transition-duration: 0.01ms !important;
+    }
 }

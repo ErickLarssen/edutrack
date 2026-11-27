@@ -36,7 +36,7 @@ export function DevolucoesPage() {
             <SearchInput value={busca} onChange={setBusca} placeholder="Buscar por patrimônio..." />
 
             {isLoading && <Spinner />}
-            {isError && <p className="text-sm text-red-600">Não foi possível carregar as devoluções.</p>}
+            {isError && <p className="text-sm text-red-600 dark:text-red-400">Não foi possível carregar as devoluções.</p>}
 
             {data && (
                 <>

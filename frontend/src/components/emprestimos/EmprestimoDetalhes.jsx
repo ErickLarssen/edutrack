@@ -18,7 +18,7 @@ export function EmprestimoDetalhes({ id }) {
     const [erro, setErro] = useState('')
 
     if (isLoading) return <p className="text-sm text-slate-500 dark:text-slate-400">Carregando...</p>
-    if (isError || !emprestimo) return <p className="text-sm text-red-600">Não foi possível carregar os detalhes.</p>
+    if (isError || !emprestimo) return <p className="text-sm text-red-600 dark:text-red-400">Não foi possível carregar os detalhes.</p>
 
     const handleDevolucao = async (payload) => {
         setErro('')
@@ -43,19 +43,19 @@ export function EmprestimoDetalhes({ id }) {
     return (
         <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3 text-sm">
-                <div><span className="text-slate-500 dark:text-slate-400">Professor:</span> <span className="font-medium text-slate-900">{emprestimo.professor.nome}</span></div>
-                <div><span className="text-slate-500 dark:text-slate-400">Registrado por:</span> <span className="font-medium text-slate-900">{emprestimo.usuario.nome}</span></div>
-                <div><span className="text-slate-500 dark:text-slate-400">Data:</span> <span className="font-medium text-slate-900">{formatarData(emprestimo.data)}</span></div>
-                <div><span className="text-slate-500 dark:text-slate-400">Hora:</span> <span className="font-medium text-slate-900">{emprestimo.hora}</span></div>
+                <div><span className="text-slate-500 dark:text-slate-400">Professor:</span> <span className="font-medium text-slate-900 dark:text-slate-100">{emprestimo.professor.nome}</span></div>
+                <div><span className="text-slate-500 dark:text-slate-400">Registrado por:</span> <span className="font-medium text-slate-900 dark:text-slate-100">{emprestimo.usuario.nome}</span></div>
+                <div><span className="text-slate-500 dark:text-slate-400">Data:</span> <span className="font-medium text-slate-900 dark:text-slate-100">{formatarData(emprestimo.data)}</span></div>
+                <div><span className="text-slate-500 dark:text-slate-400">Hora:</span> <span className="font-medium text-slate-900 dark:text-slate-100">{emprestimo.hora}</span></div>
             </div>
 
-            {erro && <p className="text-sm text-red-600">{erro}</p>}
+            {erro && <p className="text-sm text-red-600 dark:text-red-400">{erro}</p>}
 
             <div>
                 <div className="mb-2 flex items-center justify-between">
-                    <h3 className="text-sm font-semibold text-slate-900">Equipamentos</h3>
+                    <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Equipamentos</h3>
                     {emprestimo.status === 'ATIVO' && !adicionando && (
-                        <button onClick={() => setAdicionando(true)} className="text-xs font-medium text-brand-600 hover:underline">
+                        <button onClick={() => setAdicionando(true)} className="text-xs font-medium text-brand-600 hover:underline dark:text-brand-400">
                             + Adicionar equipamento
                         </button>
                     )}
@@ -73,9 +73,9 @@ export function EmprestimoDetalhes({ id }) {
 
                 <div className="flex flex-col gap-2">
                     {emprestimo.itens.map((item) => (
-                        <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">
+                        <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
                             <div>
-                                <p className="font-medium text-slate-900">{item.equipamento.numeroPatrimonio}</p>
+                                <p className="font-medium text-slate-900 dark:text-slate-100">{item.equipamento.numeroPatrimonio}</p>
                                 <p className="text-slate-500 dark:text-slate-400">{item.equipamento.marca} {item.equipamento.modelo}</p>
                             </div>
                             {item.devolucao ? (

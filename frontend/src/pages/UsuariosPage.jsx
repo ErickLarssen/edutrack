@@ -81,7 +81,7 @@ export function UsuariosPage() {
                 </Button>
             </div>
 
-            <label className="flex w-fit items-center gap-2 text-sm text-slate-600">
+            <label className="flex w-fit items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <input
                     type="checkbox"
                     checked={incluirInativos}
@@ -89,14 +89,14 @@ export function UsuariosPage() {
                         setIncluirInativos(e.target.checked)
                         setPagina(1)
                     }}
-                    className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+                    className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 dark:border-slate-600"
                 />
                 Mostrar inativos
             </label>
 
-            {erro && <p className="text-sm text-red-600">{erro}</p>}
+            {erro && <p className="text-sm text-red-600 dark:text-red-400">{erro}</p>}
             {isLoading && <Spinner />}
-            {isError && <p className="text-sm text-red-600">Não foi possível carregar os usuários.</p>}
+            {isError && <p className="text-sm text-red-600 dark:text-red-400">Não foi possível carregar os usuários.</p>}
 
             {data && (
                 <>

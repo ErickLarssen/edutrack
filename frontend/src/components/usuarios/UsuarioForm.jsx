@@ -34,9 +34,9 @@ export function UsuarioForm({ usuario, onSubmit, enviando }) {
             />
 
             <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-slate-700">Papel</label>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Papel</label>
                 <select
-                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-slate-100 disabled:text-slate-400"
+                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-slate-100 disabled:text-slate-400 dark:text-slate-100 dark:bg-slate-800 dark:disabled:bg-slate-800/50 dark:disabled:text-slate-500 dark:border-slate-700"
                     disabled={editandoProprioAdmin}
                     {...register('role')}
                 >
@@ -47,7 +47,7 @@ export function UsuarioForm({ usuario, onSubmit, enviando }) {
                 {editandoProprioAdmin && (
                     <span className="text-xs text-slate-500 dark:text-slate-400">Você não pode alterar seu próprio papel de administrador.</span>
                 )}
-                {errors.role && <span className="text-sm text-red-600">{errors.role.message}</span>}
+                {errors.role && <span className="text-sm text-red-600 dark:text-red-400">{errors.role.message}</span>}
             </div>
 
             <Button type="submit" disabled={enviando} className="mt-2">

@@ -124,14 +124,14 @@ export function EmprestimoScannerPage() {
 
                 <Card className="max-w-md">
                     <CardHeader>
-                        <h2 className="text-sm font-semibold text-slate-900">Dados da retirada</h2>
+                        <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Dados da retirada</h2>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={iniciarScanner} className="flex flex-col gap-4">
                             <div className="flex flex-col gap-1.5">
-                                <label className="text-sm font-medium text-slate-700">Professor</label>
+                                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Professor</label>
                                 <select
-                                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-slate-100 dark:bg-slate-800 dark:border-slate-700"
                                     value={cabecalho.professorId}
                                     onChange={(e) => setCabecalho({ ...cabecalho, professorId: e.target.value })}
                                 >
@@ -173,7 +173,7 @@ export function EmprestimoScannerPage() {
                                 value={cabecalho.previsaoDevolucao}
                                 onChange={(e) => setCabecalho({ ...cabecalho, previsaoDevolucao: e.target.value })}
                             />
-                            {erroCabecalho && <p className="text-sm text-red-600">{erroCabecalho}</p>}
+                            {erroCabecalho && <p className="text-sm text-red-600 dark:text-red-400">{erroCabecalho}</p>}
                             <Button type="submit">Iniciar leitura de QR Code</Button>
                         </form>
                     </CardContent>
@@ -186,7 +186,7 @@ export function EmprestimoScannerPage() {
         <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-semibold text-slate-900">Escaneando equipamentos</h1>
+                    <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Escaneando equipamentos</h1>
                     <p className="text-sm text-slate-500 dark:text-slate-400">Aponte a câmera para o QR Code de cada equipamento</p>
                 </div>
                 <Button variant="secondary" onClick={() => setEtapa('cabecalho')}>Voltar</Button>
@@ -215,11 +215,11 @@ export function EmprestimoScannerPage() {
                         <Button type="submit" variant="secondary">Adicionar</Button>
                     </form>
 
-                    {erroScan && <p className="text-sm text-red-600">{erroScan}</p>}
+                    {erroScan && <p className="text-sm text-red-600 dark:text-red-400">{erroScan}</p>}
 
                     <Card>
                         <CardHeader>
-                            <h2 className="text-sm font-semibold text-slate-900">
+                            <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                                 Equipamentos escaneados ({itensCarrinho.length})
                             </h2>
                         </CardHeader>
@@ -228,9 +228,9 @@ export function EmprestimoScannerPage() {
                                 <p className="text-sm text-slate-500 dark:text-slate-400">Nenhum equipamento escaneado ainda.</p>
                             )}
                             {itensCarrinho.map((item) => (
-                                <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm">
+                                <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
                                     <div>
-                                        <p className="font-medium text-slate-900">{item.numeroPatrimonio}</p>
+                                        <p className="font-medium text-slate-900 dark:text-slate-100">{item.numeroPatrimonio}</p>
                                         <p className="text-slate-500 dark:text-slate-400">{item.marca} {item.modelo}</p>
                                     </div>
                                     <button onClick={() => removerItem(item.id)} className="text-slate-400 hover:text-red-600">

@@ -71,10 +71,10 @@ function EmprestimoFormCampos({ modoEdicao, emprestimo, onSubmit, enviando }) {
     return (
         <form onSubmit={handleSubmit(handleSubmitInterno)} className="flex flex-col gap-4">
             {modoEdicao && (
-                <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
-                    <p><span className="font-medium text-slate-900">Professor:</span> {emprestimo.professor.nome}</p>
+                <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-600 dark:text-slate-400 dark:bg-slate-800/60">
+                    <p><span className="font-medium text-slate-900 dark:text-slate-100">Professor:</span> {emprestimo.professor.nome}</p>
                     <p className="mt-1">
-                        <span className="font-medium text-slate-900">Equipamentos:</span>{' '}
+                        <span className="font-medium text-slate-900 dark:text-slate-100">Equipamentos:</span>{' '}
                         {emprestimo.itens.map((item) => item.equipamento.numeroPatrimonio).join(', ')}
                     </p>
                 </div>
@@ -83,9 +83,9 @@ function EmprestimoFormCampos({ modoEdicao, emprestimo, onSubmit, enviando }) {
             {!modoEdicao && (
                 <>
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-medium text-slate-700">Professor</label>
+                        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Professor</label>
                         <select
-                            className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-slate-100 dark:bg-slate-800 dark:border-slate-700"
                             {...register('professorId')}
                         >
                             <option value="">Selecione um professor</option>
@@ -93,7 +93,7 @@ function EmprestimoFormCampos({ modoEdicao, emprestimo, onSubmit, enviando }) {
                                 <option key={professor.id} value={professor.id}>{professor.nome}</option>
                             ))}
                         </select>
-                        {errors.professorId && <span className="text-sm text-red-600">{errors.professorId.message}</span>}
+                        {errors.professorId && <span className="text-sm text-red-600 dark:text-red-400">{errors.professorId.message}</span>}
                     </div>
 
                     <EquipamentoMultiSelect control={control} error={errors.equipamentoIds?.message} />
